@@ -18,4 +18,5 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 
 
 #이미지 생성 명령어 docker build -t {이미지명} .
-#컨테이너 생성 & 실행 명령어 docker run --name {컨테이너명} -v $(pwd):/home/eritip -p 8888:8888 {이미지명}
+#컨테이너 생성 & 실행 명령어 docker run --name {컨테이너명} -v $(pwd):/home/eritip -p 5000:5000 {이미지명}
+#0.0.0.0:5000으로 연결 성공
