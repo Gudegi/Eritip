@@ -27,5 +27,5 @@ def create_app():
 
 
     app.register_blueprint(create_views.bp)
-
+    app.register_blueprint(chat_views.bp)
     return app

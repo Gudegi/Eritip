@@ -3,7 +3,7 @@ from eri.models import User
 import  json, time
 
 bp = Blueprint('chat', __name__, url_prefix='/chat')
-
+#init.py에 app.register_blueprint(chat_views.bp) 등록!!!!
 
 @bp.route('/', methods=['POST'])
 def response():
