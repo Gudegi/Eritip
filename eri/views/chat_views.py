@@ -15,7 +15,7 @@ def response():
     for i in info:
         if i.name in query:
             name =  i.name
-            gaeIn = int(i.gaeIn)
+            gaeIn = str(i.gaeIn)
             res = name + '님의 학번은' + gaeIn + '입니다.'
      
     params = {"response" : res}
