@@ -17,8 +17,9 @@ def response():
             name =  i.name
             gaeIn = int(i.gaeIn)
             res = name + '님의 학번은' + gaeIn + '입니다.'
-     params = {"response" : res}
-     result = json.dumps(params, ensure_ascii=False)
-     res = make_response(result)
+     
+    params = {"response" : res}
+    result = json.dumps(params, ensure_ascii=False)
+    res = make_response(result)
 
     return res
