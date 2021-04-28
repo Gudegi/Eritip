@@ -5,7 +5,7 @@ services:
         ports: 
             - "80:80" 
         volumes:
-             - $(pwd):/home/eritip
+             - .:/home/eritip
              - ./config/nginx:/etc/nginx.conf.d
         depends_on:
              - web
@@ -13,7 +13,7 @@ services:
         build: 
             context: .
             dockerfile: Dockerfile
-        command: gunicorn --bind unix:/home/eritip.sock "eri:create_app()"
+        command: gunicorn --bind 0:5000 "eri:create_app()"
         #gunicorn <django_project>.wsgi:application --bind 0.0.0.0:8000 
         # settings.py 환경분리 되어있어 settings를 지정해야하는 경우 다음과 같이 추가 입력 
         # [--env DJANGO_SETTINGS_MODULE='<django_project>.settings.production']
