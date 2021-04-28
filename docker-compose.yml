@@ -18,7 +18,7 @@ services:
         # settings.py 환경분리 되어있어 settings를 지정해야하는 경우 다음과 같이 추가 입력 
         # [--env DJANGO_SETTINGS_MODULE='<django_project>.settings.production']
         volumes:
-             - $(pwd):/home/eritip
+             - .:/home/eritip
         #expose: 
         #    - "8000"
         ports:
