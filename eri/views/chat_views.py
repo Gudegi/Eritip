@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 from eri.models import User
 import  json, time
 
@@ -15,7 +15,10 @@ def response():
     for i in info:
         if i.name in query:
             name =  i.name
-            gaeIn = i.gaeIn 
+            gaeIn = int(i.gaeIn)
             res = name + '님의 학번은' + gaeIn + '입니다.'
-     
-    return jsonify({"response" : res})
+     params = {"response" : res}
+     result = json.dumps(params, ensure_ascii=False)
+     res = make_response(result)
+
+    return res
