@@ -15,6 +15,7 @@ ENV FLASK_ENV=developmenet
 
 WORKDIR /home/eritip
 
+#단일로 사용시, 현재는 gunicorn이용
 #CMD ["flask", "run", "--host", "0.0.0.0"]
 
 
