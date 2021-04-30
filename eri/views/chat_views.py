@@ -24,12 +24,12 @@ def response():
     if '소프트 공지' in query:
         compuList =  ComputingNot.query.all()
         for i in range(3):
-            res += compuList[i].idx + cocmpuList[i].notN + compuList[i].url + compuList[i].title + compuList[i].date + '\n' 
+            res = cocmpuList[i].notN + compuList[i].url + compuList[i].title + compuList[i].date + '\n' 
 
     if '기계 공지' in query:
         iengList =  IengNot.query.all()
         for i in range(3):
-            res += iengList[i].idx + iengList[i].notN + iengList[i].url + iengList[i].title + iengList[i].date + '\n' 
+            res = iengList[i].notN + iengList[i].url + iengList[i].title + iengList[i].date + '\n' 
     
     params = {"response" : res}
     result = json.dumps(params, ensure_ascii=False)
