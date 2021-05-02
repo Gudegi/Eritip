@@ -31,6 +31,9 @@ dependencies:
   logger: ^0.9.4
   timer_builder: ^2.0.0
   date_format: ^2.0.2
+  google_maps_flutter: ^1.0.5
+  material_floating_search_bar: ^0.3.4
+
 
 dev_dependencies:
   flutter_test:

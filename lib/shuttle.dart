@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fianl_prj/bottomnavi.dart';
-
 class Shuttle extends StatelessWidget {
 
   @override

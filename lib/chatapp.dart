@@ -59,6 +59,7 @@ class _ChatAppState extends State<ChatApp> {
           selectedItemColor: Colors.blueAccent,
           unselectedItemColor: Colors.blueGrey,
           showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
           onTap: _onItemTapped,
         )//bottomnavi,
       ),

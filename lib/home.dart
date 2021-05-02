@@ -16,12 +16,10 @@ class _HomeState extends State<Home> {
     setState(() {
       _chats.insert(0,newChat);
     });
-
-
   }
   TextEditingController _textEditingController = TextEditingController();
   List<ChatMessage> _chats=[];
-  String major='해당전공영역';
+  String major='전공';
   //9-11 1번
   @override
   Widget build(BuildContext context) {
@@ -31,10 +29,12 @@ class _HomeState extends State<Home> {
           color: clear_blue_64,
           child: Stack(children: <Widget>[
             Image.asset('images/mainhyimg.png'),
-            Positioned(
-                bottom:0, left: 120,
-                child: Text(major+" 하냥이",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold))
-            ),
+            Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(top:100),
+                  child: Text(major+" 하냥이",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold)),
+                )),
           ]),
         )
 
@@ -70,8 +70,8 @@ class _HomeState extends State<Home> {
                 FlatButton(
                   minWidth: 55,
                   onPressed: (){
-                    _handleSubmitted(_textEditingController.text);
-                  },
+                      _handleSubmitted(_textEditingController.text);
+                    },
                   child: Icon(Icons.arrow_right, size:30),
                   color: Colors.blueAccent,
                 )//기본값있음
