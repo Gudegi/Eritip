@@ -428,7 +428,7 @@ class _ProFoodState extends State<ProFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('$_prol_b')),
+            Expanded(child: Text('$_prod')),
             _prod==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue,fontWeight: FontWeight.w700),)
           ],

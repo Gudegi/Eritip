@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
             Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(top:100),
+                  padding: EdgeInsets.only(top:(MediaQuery.of(context).size.height)*0.13),
                   child: Text(major+" 하냥이",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold)),
                 )),
           ]),
@@ -52,7 +52,9 @@ class _HomeState extends State<Home> {
                   minWidth:20,
                   child:Icon(Icons.menu_rounded),
 
-                  onPressed: (){print("d");},
+                  onPressed: (){
+                    print('사이드바이용');
+                  },
                 ),
                 SizedBox(width:8.0)
                 ,
