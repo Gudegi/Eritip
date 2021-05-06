@@ -141,8 +141,6 @@ class _MapUnivState extends State<MapUniv> {
                         subtitle:Text(_getsubtitle(suggestion)),
                         leading: Icon(Icons.location_on_sharp),
                         shape: RoundedRectangleBorder(),
-                        onTap: (){
-                        },
                       );
                     },
                     suggestionsCallback: (pattern){
