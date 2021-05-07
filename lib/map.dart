@@ -112,6 +112,7 @@ class _MapUnivState extends State<MapUniv> {
           (target: LatLng(37.298002524247934, 126.83443616279172),
         zoom:17,
         ),
+
         ),
         Padding(
           padding: const EdgeInsets.only(
