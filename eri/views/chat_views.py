@@ -16,10 +16,9 @@ def response():
     bot.load_directory("../eg/brain")
     bot.sort_replies()
 
-    while True:
-        msg = query
-        if msg == '/quit':
-            quit()
+    msg = query
+    #if msg == '/quit':
+    #       quit()
         
     reply = bot.reply("localuesr", msg)
     #print('Bot >',reply)
