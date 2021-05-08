@@ -12,7 +12,8 @@ def response():
     
     bot = RiveScript(utf8=True)
     bot.unicode_puctuation = re.compile(r'[.,!?;:]')
-    bot.load_directory("./eg/brain")
+    #bot.load_directory("./eg/brain")
+    bot.load_directory("/home/eritip/views/eg/brain")
     bot.sort_replies()
 
     msg = query
