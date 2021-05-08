@@ -10,10 +10,9 @@ bp = Blueprint('chat', __name__, url_prefix='/chat')
 def response():
     query = dict(request.form)['query']
     
-
     bot = RiveScript(utf8=True)
     bot.unicode_puctuation = re.compile(r'[.,!?;:]')
-    bot.load_directory("../eg/brain")
+    bot.load_directory("./eg/brain")
     bot.sort_replies()
 
     msg = query
