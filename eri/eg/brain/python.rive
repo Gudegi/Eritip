@@ -1,0 +1,237 @@
+// Example of a Python object macro.
+
+! version = 2.0
+
+> object base64 python
+    import base64 as b64
+    mess = " ".join(args)
+
+    # Make this function work in Python3 as well.
+    import sys
+    if sys.version_info[0] == 3:
+        # Python3's Base64 requires bytes, not a str,
+        # so encode the str into bytes.
+        mess = mess.encode()
+        base = b64.b64encode(mess)
+
+        # Return the base64 result, decoded back into a str.
+        return base.decode()
+    else:
+        # Python2 is simple.
+        return b64.b64encode(mess)
+< object
+
+> object add python
+    # This function returns an int, and shows that the results
+    # from python object macros are always casted to str.
+    a, b = args
+    return int(a) + int(b)
+< object
+
+> object setvar python
+    # This function demonstrates using rs.current_user() to get
+    # the current user ID, to set a variable for them.
+    uid   = rs.current_user()
+    var   = args[0]
+    value = " ".join(args[1:])
+    rs.set_uservar(uid, var, value)
+< object
+
+
+> object univNotice python
+    table = args[0]
+    # 두번째 항목이 공지, 숫자 조합인 공지들
+    import pymysql
+
+    conn = pymysql.connect(host="database-eritip.cvgx9v3ektbw.ap-northeast-2.rds.amazonaws.com",user="admin",password='eritip18!',db='eridb', charset='utf8')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM " +table)
+    allList = cur.fetchall()
+    nlist = []
+    count = 0
+    for i in allList:
+        if count < 3:
+            nlist.append(i)
+            count +=1
+        if count >= 3:
+            if i[1] != '공지':
+                nlist.append(i)
+                count +=1
+        if count == 6:
+    	    break
+    return nlist
+< object
+
+
+> object ccssNotice python
+    #언정대용 언정대는 공지밖에 없음
+    import pymysql
+
+    conn = pymysql.connect(host="database-eritip.cvgx9v3ektbw.ap-northeast-2.rds.amazonaws.com",user="admin",password='eritip18!',db='eridb', charset='utf8')
+    cur = conn.cursor()   
+    cur.execute("SELECT * FROM ccssNotice")
+    allList = cur.fetchall()
+    nlist = []
+    count = 0
+    for i in allList:
+        nlist.append(i)
+        count +=1
+        if count == 6:
+    	    break
+    return nlist
+< object
+
+> object sportsnartsNotice python
+    #예대용 예대는 공지밖에 없음
+    import pymysql
+
+    conn = pymysql.connect(host="database-eritip.cvgx9v3ektbw.ap-northeast-2.rds.amazonaws.com",user="admin",password='eritip18!',db='eridb', charset='utf8')
+    cur = conn.cursor()   
+    cur.execute("SELECT * FROM sportsnartsNotice")
+    allList = cur.fetchall()
+    nlist = []
+    count = 0
+    for i in allList:
+        nlist.append(i)
+        count +=1
+        if count == 6:
+    	    break
+    return nlist
+< object
+
+> object haksikNotice python
+    # 학식 응답용, 인자는 식당
+    import pymysql
+    import datetime
+
+    today = datetime.datetime.today()
+    where = args[0]
+    if where == '푸드코트':
+        msg = '푸드코트는 코로나19 상황 안정시까지 휴업이다냥.'
+        return msg
+
+    conn = pymysql.connect(host="database-eritip.cvgx9v3ektbw.ap-northeast-2.rds.amazonaws.com",user="admin",password='eritip18!',db='eridb', charset='utf8')
+    cur = conn.cursor()   
+    cur.execute("SELECT * FROM haksikTable")
+    allList = cur.fetchall()
+    nlist = []
+    
+    for i in allList:
+        if i[5] == today.strftime('%Y.%m.%d'):
+            if i[1] == where:
+                nlist.append(i[1:6])
+    if len(nlist) == 0:
+        msg = '오늘은 영업하지 않는다냥.'
+        return msg
+    return nlist
+< object
+
+
++ encode * in base64
+- OK: <call>base64 <star></call>
+
++ what is # plus #
+- <star1> + <star2> = <call>add <star1> <star2></call>
+
++ python set * to *
+- Setting user variable <star1> to <star2>.<call>setvar <star1> <star2></call>
+
+// 단과대별 공지 리턴
++ @소융대의미 공지
+- <call>univNotice computingNotice</call>
+
++ @디대의미 공지
+- <call>univNotice idesignNotice</call>
+
++ @경상대의미 공지
+- <call>univNotice ibusNotice</call>
+
++ @공대의미 공지
+- <call>univNotice iengNotice</call>
+
++ @과기대의미 공지
+- <call>univNotice scitechNotice</call>
+
++ @약대의미 공지
+- <call>univNotice pharmacyNotice</call>
+
++ @국문대의미 공지
+- <call>univNotice lanCulNotice</call>
+
++ @언정대의미 공지
+- <call>ccssNotice </call>
+
++ @예대의미 공지
+- <call>sportsnartsNotice </call>
+
+
++ @소융대의미 공지*
+- <call>univNotice computingNotice</call>
+
++ @디대의미 공지*
+- <call>univNotice idesignNotice</call>
+
++ @경상대의미 공지*
+- <call>univNotice ibusNotice</call>
+
++ @공대의미 공지*
+- <call>univNotice iengNotice</call>
+
++ @과기대의미 공지*
+- <call>univNotice scitechNotice</call>
+
++ @약대의미 공지*
+- <call>univNotice pharmacyNotice</call>
+
++ @국문대의미 공지*
+- <call>univNotice lanCulNotice</call>
+
++ @언정대의미 공지*
+- <call>ccssNotice </call>
+
++ @예대의미 공지*
+- <call>sportsnartsNotice </call>
+
+// 식당별 금일 메뉴 리턴
++ @교직원식당의미
+- <call>haksikNotice 교직원식당</call>
+
++ @학생식당의미
+- <call>haksikNotice 학생식당</call>
+
++ @창의인재원의미
+- <call>haksikNotice 창의인재원식당</call>
+
++ @창업보육센터의미
+- <call>haksikNotice 창업보육센터</call>
+
++ @교직원식당의미 (메뉴|식단)
+- <call>haksikNotice 교직원식당</call>
+
++ @학생식당의미 (메뉴|식단)
+- <call>haksikNotice 학생식당</call>
+
++ @창의인재원식당의미 (메뉴|식단)
+- <call>haksikNotice 창의인재원식당</call>
+
++ @푸드코트의미 (메뉴|식단)
+- <call>haksikNotice 푸드코트</call>
+
++ @창업보육센터의미 (메뉴|식단)
+- <call>haksikNotice 창업보육센터</call>
+
++ * @교직원식당의미 (메뉴|식단)*
+- <call>haksikNotice 교직원식당</call>
+
++ * @학생식당의미 (메뉴|식단)*
+- <call>haksikNotice 학생식당</call>
+
++ * @창의인재원식당의미 (메뉴|식단)*
+- <call>haksikNotice 창의인재원식당</call>
+
++ * @푸드코트의미 (메뉴|식단)*
+- <call>haksikNotice 푸드코트</call>
+
++ * @창업보육센터의미 (메뉴|식단)*
+- <call>haksikNotice 창업보육센터</call>
+

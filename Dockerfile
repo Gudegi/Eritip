@@ -6,7 +6,9 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 && \
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
     pip install requests &&\
-    pip install gunicorn
+    pip install gunicorn &&\
+    pip install rivescript &&\
+    pip install pymysql
 
 
 ENV FLASK_APP=eri

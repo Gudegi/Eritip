@@ -1,0 +1,31 @@
+// Administrative functions.
+
++ shutdown{weight=10000}
+* <id> eq <bot master> => Shutting down... <call>shutdown</call>
+- {@botmaster only}
+
++ 종료{weight=10000}
+* <id> eq <bot master> => 종료합니다... <call>종료</call>
+- {@botmaster only2}
+
++ botmaster only
+- This command can only be used by my botmaster. <id> != <bot master>
+
+
++ botmaster only2
+- 이 기능은 관리자만 이용 가능합니다. <id> != <bot master>
+
+
+> object shutdown perl
+	my ($rs) = @_;
+
+	# Shut down.
+	exit(0);
+< object
+
+> object shutdown python
+	# Shut down
+	quit()
+< object
+
+

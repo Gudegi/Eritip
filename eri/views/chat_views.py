@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response
 from eri.models import User
-from eri.models import ComputingNot
-from eri.models import IengNot
-import  json, time
+from rivescript import RiveScript
+import re, json
 
 bp = Blueprint('chat', __name__, url_prefix='/chat')
 #init.py에 app.register_blueprint(chat_views.bp) 등록!!!!
@@ -11,8 +10,30 @@ bp = Blueprint('chat', __name__, url_prefix='/chat')
 def response():
     query = dict(request.form)['query']
     
+
+    bot = RiveScript(utf8=True)
+    bot.unicode_puctuation = re.compile(r'[.,!?;:]')
+    bot.load_directory("../eg/brain")
+    bot.sort_replies()
+
+    while True:
+        msg = query
+        if msg == '/quit':
+            quit()
+        
+    reply = bot.reply("localuesr", msg)
+    #print('Bot >',reply)
+    params = {"response": reply}
+    result = json.dumps(params, ensour_ascii=False)
+    res = make_response(result)
+
+
+
     #User.query.filter(User.name.like('%플라스크%')).all()
-    res = '안녕하세요? '+query + "" + time.ctime()
+    
+    
+    
+    '''res = '안녕하세요? '+query + "" + time.ctime()
     
     info = User.query.all() #모든 정보의 리스트에서, for문을 돌려서  이름값 i가 in query라면 학번 리턴.
     for i in info:
@@ -34,5 +55,5 @@ def response():
     params = {"response" : res}
     result = json.dumps(params, ensure_ascii=False)
     res = make_response(result)
-
+    '''
     return res

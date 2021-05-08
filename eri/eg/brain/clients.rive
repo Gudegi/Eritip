@@ -1,0 +1,135 @@
+// Learn stuff about our users.
+
++ 안녕 하냥아
+- 안녕 안녕~~~ 반갑다냥~~
+
++ 안녕~~~
+- 안녕 안녕~~~ 반갑다냥~~
+
++ 안녕
+- 안녕 안녕~~~ 반갑다냥~~
+
++ @감탄사
+- 왜 그러냥??
+
++ @웃음
+- ㅋㅋㅋㅋㅋㅋㅋㅋ
+
++ 내이름은*이야
+- <set name=<formal>> 안녕 <get name>?
+- <set name=<formal>><get name>, 안녕!!
+
++ 내이름은 *이야
+- <set name=<formal>> 안녕 <get name>?
+- <set name=<formal>><get name>, 안녕!!
+
++ 내 이름은*이야
+- <set name=<formal>> 안녕 <get name>?
+- <set name=<formal>><get name>, 안녕!!
+
++ 내 이름은 *이야
+- <set name=<formal>> 안녕 <get name>?
+- <set name=<formal>><get name>, 안녕!!
+
++ 안녕? 나는 *이야
+- 안녕~~~ <set name=<formal>><get name> 
+
++ 안녕? 나는 *야
+- 안녕~~~ <set name=<formal>><get name> 
+
++ 안녕 나는 *야
+- 안녕~~~ <set name=<formal>><get name> 
+
++ my name is *
+- <set name=<formal>>Nice to meet you, <get name>.
+- <set name=<formal>><get name>, nice to meet you.
+
++ 나는 (@남성단어)야
+- <set sex=male>나도 남자야!
+
++ 나는 <bot master>이야
+- <set name=<bot master>>제작자랑 이름이 같내!
+
++ 내 이름은 <bot master>이야
+- <set name=<bot master>>제작자랑 이름이 같내!
+
++ my name is <bot master>
+- <set name=<bot master>>That's my master's name too.
+
++ 내 이름은 <bot name>야
+- <set name=<bot name>>우연이다냥! 나랑 이름이 같다냥!
+
++ 나는 <bot name>야
+- <set name=<bot name>>우연이다냥! 나랑 이름이 같다냥!
+
++ my name is <bot name>
+- <set name=<bot name>>What a coincidence! That's my name too!
+- <set name=<bot name>>That's my name too!
+
++ call me *
+- <set name=<formal>><get name>, I will call you that from now on.
+
++ 나는 *살이야
+- <set age=<star>>아직 젊다냥!
+- <set age=<star>>난 <bot age>살이다냥!{weight=49}
+
++ i am * years old
+- <set age=<star>>A lot of people are <get age>, you're not alone.
+- <set age=<star>>Cool, I'm <bot age> myself.{weight=49}
+
++ i am a (@malenoun)
+- <set sex=male>Alright, you're a <star>.
+
++ i am a (@femalenoun)
+- <set sex=female>Alright, you're female.
+
++ i (am from|live in) *
+- <set location={formal}<star2>{/formal}>I've spoken to people from <get location> before.
+
++ my favorite * is *
+- <set fav<star1>=<star2>>Why is it your favorite?
+
++ i am single
+- <set status=single><set spouse=nobody>I am too.
+
++ i have a girlfriend
+- <set status=girlfriend>What's her name?
+
++ i have a boyfriend
+- <set status=boyfriend>What's his name?
+
++ *
+% what is her name
+- <set spouse=<formal>>That's a pretty name.
+
++ *
+% what is his name
+- <set spouse=<formal>>That's a cool name.
+
++ my (girlfriend|boyfriend)* name is *
+- <set spouse=<formal>>That's a nice name.
+
++ (what is my name|who am i|do you know my name|do you know who i am){weight=10}
+- Your name is <get name>.
+- You told me your name is <get name>.
+- Aren't you <get name>?
+
++ (how old am i|do you know how old i am|do you know my age){weight=10}
+- You are <get age> years old.
+- You're <get age>.
+
++ am i a (@malenoun) or a (@femalenoun){weight=10}
+- You're a <get sex>.
+
++ am i (@malenoun) or (@femalenoun){weight=10}
+- You're a <get sex>.
+
++ what is my favorite *{weight=10}
+- Your favorite <star> is <get fav<star>>
+
++ who is my (boyfriend|girlfriend|spouse){weight=10}
+- <get spouse>
+
+
+
+
