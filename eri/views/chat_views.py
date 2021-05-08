@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response
 from eri.models import User
 from rivescript import RiveScript
-import re, json
+import re, json, os
 
 bp = Blueprint('chat', __name__, url_prefix='/chat')
 #init.py에 app.register_blueprint(chat_views.bp) 등록!!!!
@@ -13,7 +13,7 @@ def response():
     bot = RiveScript(utf8=True)
     bot.unicode_puctuation = re.compile(r'[.,!?;:]')
     #bot.load_directory("./eg/brain")
-    bot.load_directory("/home/eritip/views/eg/brain")
+    bot.load_directory(os.path.join(os.path.dirname(__file__), "..", "eg", "brain"))
     bot.sort_replies()
 
     msg = query
