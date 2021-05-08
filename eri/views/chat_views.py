@@ -23,7 +23,7 @@ def response():
     reply = bot.reply("localuesr", msg)
     #print('Bot >',reply)
     params = {"response": reply}
-    result = json.dumps(params, ensour_ascii=False)
+    result = json.dumps(params, ensure_ascii=False)
     res = make_response(result)
 
 
