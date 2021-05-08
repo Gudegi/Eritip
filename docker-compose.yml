@@ -9,6 +9,7 @@ services:
              - ./config/nginx:/etc/nginx.conf.d
         depends_on:
              - web
+        #web 실행 후 nginx실행되게
      web: 
         build: 
             context: .

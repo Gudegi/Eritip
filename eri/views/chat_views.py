@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response
 from eri.models import User
 from rivescript import RiveScript
-import re, json, os
+import re, json, os, ast
 
 bp = Blueprint('chat', __name__, url_prefix='/chat')
 #init.py에 app.register_blueprint(chat_views.bp) 등록!!!!
@@ -17,18 +17,19 @@ def response():
     bot.sort_replies()
 
     msg = query
-    #if msg == '/quit':
-    #       quit()
-        
+    
     reply = bot.reply("localuesr", msg)
-    #print('Bot >',reply)
-    params = {"response": reply}
+    try:
+        reply = ast.literal_eval(reply)
+        params = {"response": reply}
+    except:
+        params = {"response": reply}
     result = json.dumps(params, ensure_ascii=False)
     res = make_response(result)
 
 
 
-    #User.query.filter(User.name.like('%플라스크%')).all()
+    #User.query.filter(User.name.like('%플라스크%')).all() User 모델 테이블에서 name 값 필터링.
     
     
     
