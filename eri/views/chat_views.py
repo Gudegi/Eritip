@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, make_response
+from flask import Blueprint, request, make_response
 from eri.models import User
 from rivescript import RiveScript
 import re, json, os, ast

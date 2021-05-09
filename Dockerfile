@@ -8,11 +8,12 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 && \
     pip install requests &&\
     pip install gunicorn &&\
     pip install rivescript &&\
-    pip install pymysql
+    pip install pymysql   &&\
+    pip install pandas
 
 
 ENV FLASK_APP=eri
-ENV FLASK_ENV=developmenet
+#ENV FLASK_ENV=developmenet
 
 
 WORKDIR /home/eritip

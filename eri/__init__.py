@@ -22,10 +22,11 @@ def create_app():
 
     #블루프린트
 
-    from .views import main_views, create_views, chat_views
+    from .views import main_views, create_views, chat_views, haksik_views
     app.register_blueprint(main_views.bp)
 
 
     app.register_blueprint(create_views.bp)
     app.register_blueprint(chat_views.bp)
+    app.register_blueprint(haksik_views.bp)
     return app
