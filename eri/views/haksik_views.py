@@ -26,7 +26,6 @@ def haksikNotice():
     for i in df['title']:
         if buffer != i:
             buffer = i
-            #print('changed {}'.format(cnt))
             idxList.append(cnt)
             cnt+=1
         else:
