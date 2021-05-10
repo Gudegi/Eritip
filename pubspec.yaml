@@ -57,6 +57,26 @@ flutter:
     - images/mainhyimg.png
     - images/loginhyimg.png
     - images/symbol.png
+    - images/101desc1st.png
+    - images/101desc2nd.png
+    - images/101desc3rd.png
+    - images/101desc4th.png
+    - images/101desc5th.png
+    - images/101img1st.png
+    - images/101img2nd.png
+    - images/101img3rd.png
+    - images/101img4th.png
+    - images/101img5th.png
+    - images/102desc1st.png
+    - images/102desc2nd.png
+    - images/102desc3rd.png
+    - images/102desc4th.png
+    - images/102desc5th.png
+    - images/102img1st.png
+    - images/102img2nd.png
+    - images/102img3rd.png
+    - images/102img4th.png
+    - images/102img5th.png
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

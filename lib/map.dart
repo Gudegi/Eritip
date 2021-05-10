@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_fianl_prj/placedata.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
 import 'dart:async';
+
+import 'package:flutter_fianl_prj/bdstructure/bd101.dart';
+import 'package:flutter_fianl_prj/bdstructure/bd102.dart';
+
 
 class MapUniv extends StatefulWidget {
 
@@ -13,6 +16,7 @@ class MapUniv extends StatefulWidget {
 }
 
 class _MapUnivState extends State<MapUniv> {
+  static const twilight_blue = const Color(0xff0b4c86);
   Completer<GoogleMapController> _controller=Completer();
   GlobalKey<FormBuilderState> _fbkey=GlobalKey<FormBuilderState>();
   Set<Marker> _markers={};
@@ -51,7 +55,6 @@ class _MapUnivState extends State<MapUniv> {
     _fbkey.currentState.save();
     final inputValue=_fbkey.currentState.value;
     final id=inputValue['buildingName'];
-    print(id);
 
     final foundPlace=places.firstWhere(
             (place) => place['name']==id,
@@ -73,25 +76,662 @@ class _MapUnivState extends State<MapUniv> {
             infoWindow: InfoWindow(
               title: id,
               snippet: '자세한 정보를 보시려면 클릭하세요',
-              onTap: (){
-                showBottomSheet(
-                  context: context,
-                  builder: (context){
-                    return Container(
-                      width: 300, height: 300,
-                      child: Text('구조도', style: TextStyle(fontSize: 30),)
-                    );
-                  }
-                );
-              }
+              onTap: _showbottomsheet
             ),),
         );
     });
 
   }
 
+  void _showbottomsheet(){
+    _fbkey.currentState.save();
+    final inputValue=_fbkey.currentState.value;
+    final bd=inputValue['buildingName'];
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft:Radius.circular(15),
+                topRight: Radius.circular(15)
+            )
+        ),
+        context: context,
+        isScrollControlled: true,//modal창 하나도 안가림
+        builder: (context){
+          return SingleChildScrollView(//픽셀오버오류
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    SizedBox(height: 10,),
+                    Row(mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[TextButton(child:Icon(Icons.close_rounded, size:30),onPressed: (){Navigator.of(context).pop();},)]),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(bd,style: TextStyle(
+                              fontFamily: "Gothic",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 20,
+                              color: twilight_blue,
+                              fontStyle: FontStyle.normal),),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 30),
+                      child: Column(children: [
+                        if(bd=='제1공학관')Container(child: Column(
+                          children: <Widget>[
+                            ListTile(title: Text('1층'),
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Bd101_1st()));
+                              },),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('2층'),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd101_2nd()));
+                                }),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('3층'),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd101_3rd()));
+                                }),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('4층'),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd101_4th()));
+                                }),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('5층'),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd101_5th()));
+                                })
+                          ],
+                        ),),
 
+                        if(bd=='제2공학관')Container(child: Column(
+                          children: <Widget>[
+                            ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Bd102_1st()));
+                              },),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd102_2nd()));
+                                }),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd102_3rd()));
+                                }),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd102_4th()));
+                                }),
+                            Divider(
+                              thickness: 1,
+                              color:Colors.blue,
+                              height: 3,//divider의 패딩부분
+                            ),
+                            ListTile(title: Text('5층',style: TextStyle(fontSize: 17)),
+                                onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Bd102_5th()));
+                                })
+                          ],
+                        )),
+                        // if(bd=='제3공학관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('B1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){})
+                        //   ],
+                        // )),
+                        // if(bd=='제4공학관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('B1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){})
+                        //   ],
+                        // ),),
+                        // if(bd=='제5공학관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('B1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){})
+                        //   ],
+                        // ),),
+                        // if(bd=='경상관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){})
+                        //   ],
+                        // )),
+                        // if(bd=='국제문화관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){})
+                        //   ],
+                        // )),
+                        // if(bd=='디자인교육관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17)),
+                        //         onTap: (){}),
+                        //   ],
+                        // )),
+                        // if(bd=='디자인문화관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //   ],
+                        // )),
+                        // if(bd=='디자인연구관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //  ],
+                        // )),
+                        // if(bd=='실용음악관(Muse Hall/뮤즈홀)')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //   ],
+                        // )),
+                        // if(bd=='약학관')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('B1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //   ],
+                        // )),
+                        // if(bd=='언론정보관')Container(child:
+                        // ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('B1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //   ],
+                        // )
+                        // ),
+                        // if(bd=='제1과학기술관(입학처 입학팀)')Container(child:
+                        // ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('B1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //   ],
+                        // )),
+                        // if(bd=='제2과학기술관')Container(child:
+                        // ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('6층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},)
+                        //   ],
+                        // )),
+                        // if(bd=='체육관')Container(child:
+                        // ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //   ],
+                        // )
+                        // ),
+                        // if(bd=='학연산클러스터지원센터')Container(child:ListView(
+                        //   children: <Widget>[
+                        //     ListTile(title: Text('1층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('2층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('3층',style: TextStyle(fontSize: 17),),
+                        //         onTap: (){}),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('4층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('5층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},),
+                        //     Divider(
+                        //       thickness: 1,
+                        //       color:Colors.blue,
+                        //       height: 3,//divider의 패딩부분
+                        //     ),
+                        //     ListTile(title: Text('6층',style: TextStyle(fontSize: 17),),
+                        //       onTap: (){},)
+                        //   ],
+                        // )),
 
+                      ],)
+                    )
+                  ],
+                ),
+                //폼빌더는 키가 있어함 fbkey이용
+                SizedBox(height: 20,),//
+              ],
+            ),
+
+          );
+        }
+    );
+
+  }
 
 
   void _onMapCreated(GoogleMapController controller){
@@ -99,8 +739,6 @@ class _MapUnivState extends State<MapUniv> {
 
   }
   @override
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -172,7 +810,3 @@ class _MapUnivState extends State<MapUniv> {
     );
   }
 }
-
-
-
-
