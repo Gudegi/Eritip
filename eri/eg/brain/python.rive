@@ -105,6 +105,9 @@
     import datetime
 
     today = datetime.datetime.today()
+    plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
+    today = today + plus9
+    today = today.strftime('%Y.%m.%d')
     where = args[0]
     if where == '푸드코트':
         msg = '푸드코트는 코로나19 상황 안정시까지 휴업이다냥.'
