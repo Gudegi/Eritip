@@ -11,8 +11,9 @@ bp = Blueprint('haksik', __name__, url_prefix='/haksik')
 @bp.route('/', methods=['GET'])
 def haksikNotice():
     today = datetime.datetime.today()
+    plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
+    today = today + plus9
     today = today.strftime('%Y.%m.%d')
-    
     haksikTable = Haksik.query.filter(Haksik.date==today).all() #오늘 날짜꺼 빼옴
     haksikList = []
     for i in range(len(haksikTable)):
