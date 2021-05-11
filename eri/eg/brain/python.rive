@@ -51,7 +51,7 @@
     count = 0
     for i in allList:
         if count < 3:
-            nlist.append(i)
+            nlist.append(i[1:])
             count +=1
         if count >= 3:
             if i[1] != '공지':
@@ -74,7 +74,7 @@
     nlist = []
     count = 0
     for i in allList:
-        nlist.append(i)
+        nlist.append(i[1:])
         count +=1
         if count == 6:
     	    break
