@@ -1,9 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+
 bool _isOpenp=false;
 bool _isOpens=false;
 bool _isOpend=false;
 bool _isOpenc=false;
+
+String _prol_a = '교직원A중식';
+String _prol_b = '교직원B중식';
+String _prod = '교직원석식';
+String _prol_a_price='';
+String _prol_b_price='';
+String _prod_price='';
+
+
+String _stul_1 = '학생1특식';
+String _stul_2 = '학생2특식';
+String _stul_1_price = '';
+String _stul_2_price = '';
+
+
+
+String _dormb = '기숙사조식';
+String _dorml = '기숙사중식';
+String _dormd = '기숙사석식';
+String _dormd2 = '기숙사석식';
+String _dormb_price = '';
+String _dorml_price = '';
+String _dormd_price = '';
+String _dormd2_price = '';
+
+
+String _centerl_H = '창보한식중식';
+String _centerl_1= '창보일품중식';
+String _centerd = '창보석식';
+String _centerl_H_price = '';
+String _centerl_1_price= '';
+String _centerd_price = '';
 
 class Food extends StatefulWidget {
 
@@ -15,6 +51,173 @@ class _FoodState extends State<Food> {
   static const twilight_blue = const Color(0xff0b4c86);
   static const brownish_grey = const Color(0xff707070);
   static const light_grey = const Color(0xfff4f4f4);
+
+  Future ProFoodget() async{
+    var url=Uri.parse('http://13.124.213.117:5000/haksik/');
+    var response=await http.get(url);
+    final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
+    var pro=jsonResult['교직원식당'];
+
+    if(pro[0]['menu']=='-') {
+      _prol_a = '오늘은 운영하지 않습니다.';
+      _prol_a_price = '-';
+    }
+    else {
+      _prol_a = pro[0]['menu'];
+      _prol_a_price = pro[0]['price'];
+    }
+    if(pro[1]['menu']=='-') {
+      _prol_b = '오늘은 운영하지 않습니다.';
+      _prol_b_price='-';
+    }
+    else {
+      _prol_b = pro[1]['menu'];
+      _prol_b_price = pro[1]['price'];
+    }
+    if(pro[2]['menu']=='-') {
+      _prod = '오늘은 운영하지 않습니다.';
+      _prod_price='-';
+    }
+    else {
+      _prod = pro[2]['menu'];
+      _prod_price = pro[2]['price'];
+    }
+    setState(() {
+      if(_isOpenp){
+        _isOpenp=false;
+        print('1');
+      } else{
+        _isOpenp=true;
+        print('0');
+      }
+    });
+  }
+
+  Future StuFoodget() async{
+    var url=Uri.parse('http://13.124.213.117:5000/haksik/');
+    var response=await http.get(url);
+    final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
+    var stu=jsonResult['학생식당'];
+
+    if(stu[0]['menu']=='-') {
+      _stul_1 = '오늘은 운영하지 않습니다.';
+      _stul_1_price = '-';
+    }
+    else {
+      _stul_1 = stu[0]['menu'];
+      _stul_1_price = stu[0]['price'];
+    }
+    if(stu[1]['menu']=='-') {
+      _stul_2 = '오늘은 운영하지 않습니다.';
+      _stul_2_price='-';
+    }
+    else {
+      _stul_2 = stu[1]['menu'];
+      _stul_2_price = stu[1]['price'];
+    }
+
+    setState(() {
+      if(_isOpens){
+        _isOpens=false;
+        print('1');
+      } else{
+        _isOpens=true;
+        print('0');
+      }
+    });
+  }
+
+  Future DormFoodget() async{
+    var url=Uri.parse('http://13.124.213.117:5000/haksik/');
+    var response=await http.get(url);
+    final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
+    var dorm=jsonResult['창의인재원식당'];
+
+    if(dorm[0]['menu']=='-') {
+      _dormb = '오늘은 운영하지 않습니다.';
+      _dormb_price = '-';
+    }
+    else {
+      _dormb = dorm[0]['menu'];
+      _dormb_price = dorm[0]['price'];
+    }
+    if(dorm[1]['menu']=='-') {
+      _dorml = '오늘은 운영하지 않습니다.';
+      _dorml_price='-';
+    }
+    else {
+      _dorml = dorm[1]['menu'];
+      _dorml_price = dorm[1]['price'];
+    }
+    if(dorm[2]['menu']=='-') {
+      _dormd = '오늘은 운영하지 않습니다.';
+      _dormd_price='-';
+    }
+    else {
+      _dormd = dorm[2]['menu'];
+      _dormd_price = dorm[2]['price'];
+    }
+
+    if(dorm[3]['menu']=='-') {
+      _dormd2 = '[특식2] 오늘은 운영하지 않습니다.';
+      _dormd2_price='-';
+    }
+    else {
+      _dormd2 = dorm[3]['menu'];
+      _dormd2_price = dorm[3]['price'];
+    }
+
+    setState(() {
+      if(_isOpend){
+        _isOpend=false;
+        print('1');
+      } else{
+        _isOpend=true;
+        print('0');
+      }
+    });
+  }
+
+  Future CenterFoodget() async{
+    var url=Uri.parse('http://13.124.213.117:5000/haksik/');
+    var response=await http.get(url);
+    final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
+    var center=jsonResult['창업보육센터'];
+
+    if(center[0]['menu']=='-') {
+      _centerl_H = '오늘은 운영하지 않습니다.';
+      _centerl_H_price = '-';
+    }
+    else {
+      _centerl_H = center[0]['menu'];
+      _centerl_H_price = center[0]['price'];
+    }
+    if(center[1]['menu']=='[일품]') {
+      _centerl_1 = '[일품] 오늘은 운영하지 않습니다.';
+      _centerl_1_price='-';
+    }
+    else {
+      _centerl_1 = center[1]['menu'];
+      _centerl_1_price = center[1]['price'];
+    }
+    if(center[2]['menu']=='-') {
+      _centerd = '오늘은 운영하지 않습니다.';
+      _centerd_price='-';
+    }
+    else {
+      _centerd = center[2]['menu'];
+      _centerd_price = center[2]['price'];
+    }
+    setState(() {
+      if(_isOpenc){
+        _isOpenc=false;
+        print('1');
+      } else{
+        _isOpenc=true;
+        print('0');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +242,7 @@ class _FoodState extends State<Food> {
               ),
               child: ListTile(
                 dense: true,
-                onTap: (){
-                  setState(() {
-                    if(_isOpenp){
-                      _isOpenp=false;
-                      print('1');
-                    } else{
-                      _isOpenp=true;
-                      print('0');
-                    }
-                  });
-                },
+                onTap: ProFoodget,
                 tileColor: light_grey,
                 title: Text('교직원식당',style: TextStyle
                   (fontSize: 25, color: Colors.black, fontWeight: FontWeight.w500,
@@ -121,17 +314,7 @@ class _FoodState extends State<Food> {
               ),
               child: ListTile(
                 dense: true,
-                onTap: (){
-                  setState(() {
-                    if(_isOpens){
-                      _isOpens=false;
-                      print('1');
-                    } else{
-                      _isOpens=true;
-                      print('0');
-                    }
-                  });
-                },
+                onTap: StuFoodget,
                 tileColor: light_grey,
                 title: Text('학생식당',style: TextStyle
                   (fontSize: 25, color: Colors.black, fontWeight: FontWeight.w500,
@@ -197,17 +380,7 @@ class _FoodState extends State<Food> {
               ),
               child: ListTile(
                 dense: true,
-                onTap: (){
-                  setState(() {
-                    if(_isOpend){
-                      _isOpend=false;
-                      print('1');
-                    } else{
-                      _isOpend=true;
-                      print('0');
-                    }
-                  });
-                },
+                onTap: DormFoodget,
                 tileColor: light_grey,
                 title: Text('창의인재원식당',style: TextStyle
                   (fontSize: 25, color: Colors.black, fontWeight: FontWeight.w500,
@@ -286,17 +459,7 @@ class _FoodState extends State<Food> {
               ),
               child: ListTile(
                 dense: true,
-                onTap: (){
-                  setState(() {
-                    if(_isOpenc){
-                      _isOpenc=false;
-                      print('1');
-                    } else{
-                      _isOpenc=true;
-                      print('0');
-                    }
-                  });
-                },
+                onTap: CenterFoodget,
                 tileColor: light_grey,
                 title: Text('창업보육센터',style: TextStyle
                   (fontSize: 25, color: Colors.black, fontWeight: FontWeight.w500,
@@ -371,13 +534,9 @@ class ProFood extends StatefulWidget {
   @override
   _ProFoodState createState() => _ProFoodState();
 }
-
 class _ProFoodState extends State<ProFood> {
   static const brownish_grey = const Color(0xff707070);
   static const twilight_blue = const Color(0xff0b4c86);
-  String _prol_a = '교직원A중식';
-  String _prol_b = '교직원B중식';
-  String _prod = '교직원석식';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -394,8 +553,8 @@ class _ProFoodState extends State<ProFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[중식A] : $_prol_a')),
-            _prol_a==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_prol_a')),
+            Text('  $_prol_a_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -406,8 +565,8 @@ class _ProFoodState extends State<ProFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[중식B] : $_prol_b')),
-            _prol_b==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_prol_b')),
+            Text('  $_prol_b_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -429,7 +588,7 @@ class _ProFoodState extends State<ProFood> {
         Row(
           children: [
             Expanded(child: Text('$_prod')),
-            _prod==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
+            Text('  $_prod_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue,fontWeight: FontWeight.w700),)
           ],
         )
@@ -442,12 +601,9 @@ class StuFood extends StatefulWidget {
    @override
   _StuFoodState createState() => _StuFoodState();
 }
-
 class _StuFoodState extends State<StuFood> {
   static const brownish_grey = const Color(0xff707070);
   static const twilight_blue = const Color(0xff0b4c86);
-  String _stul_1 = '학생1특식';
-  String _stul_2 = '학생2특식';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -464,8 +620,8 @@ class _StuFoodState extends State<StuFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[특식] : $_stul_1')),
-            _stul_1==null?Text(''):Text('  3500원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_stul_1')),
+            Text('  $_stul_1_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -476,8 +632,8 @@ class _StuFoodState extends State<StuFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[특식] : $_stul_2')),
-            _stul_2==null?Text(''):Text('  4000원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_stul_2')),
+            Text('  $_stul_2_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -489,13 +645,9 @@ class DormFood extends StatefulWidget {
   @override
   _DormFoodState createState() => _DormFoodState();
 }
-
 class _DormFoodState extends State<DormFood> {
   static const brownish_grey = const Color(0xff707070);
   static const twilight_blue = const Color(0xff0b4c86);
-  String _dormb = '기숙사조식';
-  String _dorml = '기숙사중식';
-  String _dormd = '기숙사석식';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -512,8 +664,8 @@ class _DormFoodState extends State<DormFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[특식] : $_dormb')),
-            _dormb==null?Text(''):Text('  3500원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_dormb')),
+            Text('  $_dormb_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -534,8 +686,8 @@ class _DormFoodState extends State<DormFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[특식] : $_dorml')),
-            _dorml==null?Text(''):Text('  3500원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_dorml')),
+            Text('  $_dorml_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -556,8 +708,20 @@ class _DormFoodState extends State<DormFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[특식] : $_dormd')),
-            _dormd==null?Text(''):Text('  3500원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_dormd')),
+            Text('  $_dormd_price',textAlign: TextAlign.right,
+              style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
+          ],
+        ),
+        Divider(
+          thickness:2,
+          color:brownish_grey,
+          height: 5,//divider의 패딩부분
+        ),
+        Row(
+          children: [
+            Expanded(child: Text('$_dormd2')),
+            Text('  $_dormd2_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         )
@@ -569,13 +733,9 @@ class CenterFood extends StatefulWidget {
   @override
   _CenterFoodState createState() => _CenterFoodState();
 }
-
 class _CenterFoodState extends State<CenterFood> {
   static const brownish_grey = const Color(0xff707070);
   static const twilight_blue = const Color(0xff0b4c86);
-  String _centerl_H = '창보한식중식';
-  String _centerl_1= '창보일품중식';
-  String _centerd = '창보석식';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -592,8 +752,8 @@ class _CenterFoodState extends State<CenterFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[한식] : $_centerl_H')),
-            _centerl_H==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_centerl_H')),
+            Text('  $_centerl_H_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -604,8 +764,8 @@ class _CenterFoodState extends State<CenterFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[일품] : $_centerl_1')),
-            _centerl_1==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_centerl_1')),
+            Text('  $_centerl_1_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         ),
@@ -626,8 +786,8 @@ class _CenterFoodState extends State<CenterFood> {
         ),
         Row(
           children: [
-            Expanded(child: Text('[한식] : $_centerd')),
-            _centerd==null?Text(''):Text('  5000원',textAlign: TextAlign.right,
+            Expanded(child: Text('$_centerd')),
+            Text('  $_centerd_price',textAlign: TextAlign.right,
               style: TextStyle(color: twilight_blue, fontWeight: FontWeight.w700),)
           ],
         )

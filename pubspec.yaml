@@ -33,6 +33,7 @@ dependencies:
   date_format: ^2.0.2
   google_maps_flutter: ^1.0.5
   flutter_form_builder: ^3.14.1
+  http: ^0.12.2
 
 
 dev_dependencies:
