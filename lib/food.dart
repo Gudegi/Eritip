@@ -9,6 +9,7 @@ bool _isOpens=false;
 bool _isOpend=false;
 bool _isOpenc=false;
 
+bool _proisOpen=false;
 String _prol_a = '교직원A중식';
 String _prol_b = '교직원B중식';
 String _prod = '교직원석식';
@@ -16,14 +17,14 @@ String _prol_a_price='';
 String _prol_b_price='';
 String _prod_price='';
 
-
+bool _stuisOpen=false;
 String _stul_1 = '학생1특식';
 String _stul_2 = '학생2특식';
 String _stul_1_price = '';
 String _stul_2_price = '';
 
 
-
+bool _dormisOpen=false;
 String _dormb = '기숙사조식';
 String _dorml = '기숙사중식';
 String _dormd = '기숙사석식';
@@ -33,7 +34,7 @@ String _dorml_price = '';
 String _dormd_price = '';
 String _dormd2_price = '';
 
-
+bool _centerisOpen=false;
 String _centerl_H = '창보한식중식';
 String _centerl_1= '창보일품중식';
 String _centerd = '창보석식';
@@ -57,30 +58,40 @@ class _FoodState extends State<Food> {
     var response=await http.get(url);
     final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
     var pro=jsonResult['교직원식당'];
+    setState(() {
+      if (pro==null){
+        _proisOpen=false;
+      }else{
+        _proisOpen=true;
+      }
+    });
+    if (pro!=null){
+      _proisOpen=true;
+      if(pro[0]['menu']=='-') {
+        _prol_a = '오늘은 운영하지 않습니다.';
+        _prol_a_price = '-';
+      }
+      else {
+        _prol_a = pro[0]['menu'];
+        _prol_a_price = pro[0]['price'];
+      }
+      if(pro[1]['menu']=='-') {
+        _prol_b = '오늘은 운영하지 않습니다.';
+        _prol_b_price='-';
+      }
+      else {
+        _prol_b = pro[1]['menu'];
+        _prol_b_price = pro[1]['price'];
+      }
+      if(pro[2]['menu']=='-') {
+        _prod = '오늘은 운영하지 않습니다.';
+        _prod_price='-';
+      }
+      else {
+        _prod = pro[2]['menu'];
+        _prod_price = pro[2]['price'];
+      }
 
-    if(pro[0]['menu']=='-') {
-      _prol_a = '오늘은 운영하지 않습니다.';
-      _prol_a_price = '-';
-    }
-    else {
-      _prol_a = pro[0]['menu'];
-      _prol_a_price = pro[0]['price'];
-    }
-    if(pro[1]['menu']=='-') {
-      _prol_b = '오늘은 운영하지 않습니다.';
-      _prol_b_price='-';
-    }
-    else {
-      _prol_b = pro[1]['menu'];
-      _prol_b_price = pro[1]['price'];
-    }
-    if(pro[2]['menu']=='-') {
-      _prod = '오늘은 운영하지 않습니다.';
-      _prod_price='-';
-    }
-    else {
-      _prod = pro[2]['menu'];
-      _prod_price = pro[2]['price'];
     }
     setState(() {
       if(_isOpenp){
@@ -91,6 +102,7 @@ class _FoodState extends State<Food> {
         print('0');
       }
     });
+
   }
 
   Future StuFoodget() async{
@@ -98,24 +110,33 @@ class _FoodState extends State<Food> {
     var response=await http.get(url);
     final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
     var stu=jsonResult['학생식당'];
+    setState(() {
+      if (stu==null){
+        _stuisOpen=false;
+      }else{
+        _stuisOpen=true;
+      }
+    });
+    if (stu!=null){
+      if(stu[0]['menu']=='-') {
+        _stul_1 = '오늘은 운영하지 않습니다.';
+        _stul_1_price = '-';
+      }
+      else {
+        _stul_1 = stu[0]['menu'];
+        _stul_1_price = stu[0]['price'];
+      }
+      if(stu[1]['menu']=='-') {
+        _stul_2 = '오늘은 운영하지 않습니다.';
+        _stul_2_price='-';
+      }
+      else {
+        _stul_2 = stu[1]['menu'];
+        _stul_2_price = stu[1]['price'];
+      }
 
-    if(stu[0]['menu']=='-') {
-      _stul_1 = '오늘은 운영하지 않습니다.';
-      _stul_1_price = '-';
-    }
-    else {
-      _stul_1 = stu[0]['menu'];
-      _stul_1_price = stu[0]['price'];
-    }
-    if(stu[1]['menu']=='-') {
-      _stul_2 = '오늘은 운영하지 않습니다.';
-      _stul_2_price='-';
-    }
-    else {
-      _stul_2 = stu[1]['menu'];
-      _stul_2_price = stu[1]['price'];
-    }
 
+    }
     setState(() {
       if(_isOpens){
         _isOpens=false;
@@ -125,6 +146,8 @@ class _FoodState extends State<Food> {
         print('0');
       }
     });
+
+
   }
 
   Future DormFoodget() async{
@@ -132,41 +155,54 @@ class _FoodState extends State<Food> {
     var response=await http.get(url);
     final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
     var dorm=jsonResult['창의인재원식당'];
+    setState(() {
+      if (dorm==null){
+        _dormisOpen=false;
+      }else{
+        _dormisOpen=true;
+      }
+    });
 
-    if(dorm[0]['menu']=='-') {
-      _dormb = '오늘은 운영하지 않습니다.';
-      _dormb_price = '-';
-    }
-    else {
-      _dormb = dorm[0]['menu'];
-      _dormb_price = dorm[0]['price'];
-    }
-    if(dorm[1]['menu']=='-') {
-      _dorml = '오늘은 운영하지 않습니다.';
-      _dorml_price='-';
-    }
-    else {
-      _dorml = dorm[1]['menu'];
-      _dorml_price = dorm[1]['price'];
-    }
-    if(dorm[2]['menu']=='-') {
-      _dormd = '오늘은 운영하지 않습니다.';
-      _dormd_price='-';
-    }
-    else {
-      _dormd = dorm[2]['menu'];
-      _dormd_price = dorm[2]['price'];
-    }
+    if (dorm!=null){
+      if(dorm[0]['menu']=='-' || dorm[0]['menu']=='[특식1] - 일요일 조식 운영없습니다.-') {
+        _dormb = '[특식1] 오늘은 운영하지 않습니다.';
+        _dormb_price = '-';
+      }
+      else {
+        _dormb = dorm[0]['menu'];
+        _dormb_price = dorm[0]['price'];
+      }
+      if(dorm[1]['menu']=='-') {
+        _dorml = '오늘은 운영하지 않습니다.';
+        _dorml_price='-';
+      }
+      else {
+        _dorml = dorm[1]['menu'];
+        _dorml_price = dorm[1]['price'];
+      }
+      if(dorm[2]['menu']=='-') {
+        _dormd = '오늘은 운영하지 않습니다.';
+        _dormd_price='-';
+      }
+      else {
+        _dormd = dorm[2]['menu'];
+        _dormd_price = dorm[2]['price'];
+      }
+      if(dorm.length==3){
+        _dormd2 = '[특식2] 오늘은 운영하지 않습니다.';
+        _dormd2_price='-';
+      }else{
+        if(dorm[3]['menu']=='-') {
+          _dormd2 = '[특식2] 오늘은 운영하지 않습니다.';
+          _dormd2_price='-';
+        }
+        else {
+          _dormd2 = dorm[3]['menu'];
+          _dormd2_price = dorm[3]['price'];
+        }
+      }
 
-    if(dorm[3]['menu']=='-') {
-      _dormd2 = '[특식2] 오늘은 운영하지 않습니다.';
-      _dormd2_price='-';
     }
-    else {
-      _dormd2 = dorm[3]['menu'];
-      _dormd2_price = dorm[3]['price'];
-    }
-
     setState(() {
       if(_isOpend){
         _isOpend=false;
@@ -176,6 +212,8 @@ class _FoodState extends State<Food> {
         print('0');
       }
     });
+
+
   }
 
   Future CenterFoodget() async{
@@ -184,7 +222,15 @@ class _FoodState extends State<Food> {
     final jsonResult=jsonDecode(utf8.decode(response.bodyBytes));
     var center=jsonResult['창업보육센터'];
 
-    if(center[0]['menu']=='-') {
+    setState(() {
+      if (center==null){
+        _centerisOpen=false;
+      }else{
+        _centerisOpen=true;
+      }
+    });
+
+    if (center!=null){if(center[0]['menu']=='-') {
       _centerl_H = '오늘은 운영하지 않습니다.';
       _centerl_H_price = '-';
     }
@@ -208,6 +254,7 @@ class _FoodState extends State<Food> {
       _centerd = center[2]['menu'];
       _centerd_price = center[2]['price'];
     }
+    }
     setState(() {
       if(_isOpenc){
         _isOpenc=false;
@@ -217,6 +264,8 @@ class _FoodState extends State<Food> {
         print('0');
       }
     });
+
+
   }
 
   @override
@@ -539,7 +588,7 @@ class _ProFoodState extends State<ProFood> {
   static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return (_proisOpen==false)?Column(children: <Widget>[Text('오늘은 운영하지 않습니다.')],):Column(
       children: [
         Row(
           children: [
@@ -606,7 +655,7 @@ class _StuFoodState extends State<StuFood> {
   static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return (_stuisOpen==false)?Column(children: <Widget>[Text('오늘은 운영하지 않습니다.')],):Column(
       children: [
         Row(
           children: [
@@ -650,7 +699,7 @@ class _DormFoodState extends State<DormFood> {
   static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return (_dormisOpen==false)?Column(children: <Widget>[Text('오늘은 운영하지 않습니다.')],):Column(
       children: [
         Row(
           children: [
@@ -738,7 +787,7 @@ class _CenterFoodState extends State<CenterFood> {
   static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return (_centerisOpen==false)?Column(children: <Widget>[Text('오늘은 운영하지 않습니다.')],):Column(
       children: [
         Row(
           children: [
