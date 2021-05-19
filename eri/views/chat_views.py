@@ -1,8 +1,11 @@
 from flask import Blueprint, request, make_response
 from eri.models import User
-from rivescript import RiveScript
-import re, json, os, ast
+from rivescript import RiveScript   
+from eri import db
+from eri.models import ChatLog
+import re, json, os, ast, datetime
 
+#로컬에는 라이브스크립트 없다.
 bp = Blueprint('chat', __name__, url_prefix='/chat')
 #init.py에 app.register_blueprint(chat_views.bp) 등록!!!!
 
@@ -16,14 +19,29 @@ def response():
     bot.load_directory(os.path.join(os.path.dirname(__file__), "..", "eg", "brain"))
     bot.sort_replies()
 
+    today = datetime.datetime.today()
+    plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
+    today = today + plus9
+    today = today.strftime('%Y.%m.%d')
+
     msg = query
     
     reply = bot.reply("localuesr", msg)
-    try:
+    ## 진행사항- 로그를 남기려 하는데 평문은 그대로 박으면 된다. 하지만 리스트인 경우(공지, 밥) 어떻게 처리할까?
+    
+
+    try:   #리스트 형태인 경우  > 리스트로 변환
         reply = ast.literal_eval(reply)
+        log = ChatLog(client=msg, bot=reply[0], date=today) #리스트인 경우 맨 처음에 답 종류 
+        db.session.add(log)
+        db.session.commit()
         params = {"response": reply}
-    except:
+    except: 
         params = {"response": reply}
+        log = ChatLog(client=msg, bot=reply, date=today)
+        db.session.add(log)
+        db.session.commit()
+        
     result = json.dumps(params, ensure_ascii=False)
     res = make_response(result)
 

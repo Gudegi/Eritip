@@ -1,7 +1,7 @@
 # coding: utf-8
 from  eri import db
 
-#테이블 작성 후 (export FLASK_APP=eri export FLASK_ENV=development된 상태에서)
+#테이블 작성 후 (export FLASK_APP=eri된 상태에서) export FLASK_ENV=development
 #flask db migrate flask db upgrade
 
 #유저용 테이블
@@ -106,3 +106,12 @@ class Haksik(db.Model):
     menu = db.Column(db.String(100), nullable=False)
     price = db.Column(db.String(10), nullable=False)
     date = db.Column(db.String(20), nullable=False )
+
+
+
+class ChatLog(db.Model):
+    __tablename__ = 'chatLog'
+    idx = db.Column(db.Integer, primary_key=True)
+    client = db.Column(db.String(100))
+    bot = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(20), nullable=False)

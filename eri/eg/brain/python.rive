@@ -48,6 +48,7 @@
     cur.execute("SELECT * FROM " +table)
     allList = cur.fetchall()
     nlist = []
+    nlist.append(table)
     count = 0
     for i in allList:
         if count < 4:
@@ -72,6 +73,7 @@
     cur.execute("SELECT * FROM ccssNotice")
     allList = cur.fetchall()
     nlist = []
+    nlist.append('ccssNotice')
     count = 0
     for i in allList:
         nlist.append(i[1:])
@@ -90,6 +92,7 @@
     cur.execute("SELECT * FROM sportsnartsNotice")
     allList = cur.fetchall()
     nlist = []
+    nlist.append('sportsnartsNotice')
     count = 0
     for i in allList:
         nlist.append(i[1:])
@@ -109,6 +112,9 @@
     today = today + plus9
     today = today.strftime('%Y.%m.%d')
     where = args[0]
+    nlist = []
+    nlist.append(where)
+    
     if where == '푸드코트':
         msg = '푸드코트는 코로나19 상황 안정시까지 휴업이다냥.'
         return msg
@@ -117,7 +123,7 @@
     cur = conn.cursor()   
     cur.execute("SELECT * FROM haksikTable")
     allList = cur.fetchall()
-    nlist = []
+    
     
     for i in allList:
         if i[5] == today:
