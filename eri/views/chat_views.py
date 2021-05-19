@@ -35,43 +35,20 @@ def response():
         log = ChatLog(client=msg, bot=reply[0], date=today) #리스트인 경우 맨 처음에 답 종류 
         db.session.add(log)
         db.session.commit()
+        reply = reply[1:]
         params = {"response": reply}
     except: 
-        params = {"response": reply}
         log = ChatLog(client=msg, bot=reply, date=today)
         db.session.add(log)
         db.session.commit()
-        
+        params = {"response": reply}
+
     result = json.dumps(params, ensure_ascii=False)
     res = make_response(result)
 
-
+    return res
 
     #User.query.filter(User.name.like('%플라스크%')).all() User 모델 테이블에서 name 값 필터링.
     
     
     
-    '''res = '안녕하세요? '+query + "" + time.ctime()
-    
-    info = User.query.all() #모든 정보의 리스트에서, for문을 돌려서  이름값 i가 in query라면 학번 리턴.
-    for i in info:
-        if i.name in query:
-            name =  i.name
-            gaeIn = str(i.gaeIn)
-            res = name + '님의 학번은' + gaeIn + '입니다.'
-    
-    if '소프트 공지' in query:
-        compuList =  ComputingNot.query.all()
-        for i in range(3):
-            res = compuList[i].notN + compuList[i].url + compuList[i].title + str(compuList[i].date) + '\n' 
-
-    if '기계 공지' in query:
-        iengList =  IengNot.query.all()
-        for i in range(3):
-            res += iengList[i].notN + iengList[i].url + iengList[i].title + str(iengList[i].date) + '\n' 
-    
-    params = {"response" : res}
-    result = json.dumps(params, ensure_ascii=False)
-    res = make_response(result)
-    '''
-    return res
