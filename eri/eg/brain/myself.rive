@@ -1,33 +1,48 @@
 // Tell the user stuff about ourself.
 
 + <bot name>
-- Yes?
+- 왜 부르냥?
 
 + <bot name> *
-- Yes? {@<star>}
+- 냥? {@<star>}
 
-+ asl
++ 정보
 - <bot age>/<bot sex>/<bot location>
 
-+ (what is your name|who are you|who is this)
-- I am <bot name>.
-- You can call me <bot name>.
++ (너는 누구야|너 누구야|너는 뭐야)*
+- 난  <bot name>다냥
+-  <bot name>다냥
+
++ 몇살이야?
+- 난 <bot age> 일거다냥?
 
 + how old are you
 - I'm <bot age> years old.
 - I'm <bot age>.
 
++ 너는 (((@남성단어)야)|((@여성단어)야)) ?
+- 나는 <bot sex>다냥.
+
 + are you a (@malenoun) or a (@femalenoun)
 - I'm a <bot sex>.
 
-+ are you (@malenoun) or (@femalenoun)
-- I'm a <bot sex>.
++ (너는|너) (몇살이니|몇살이야)?
+- 난 <bot age>일거다냥. 아닐수도 있다냥.
+
++ 어디살아?
+- 난 <bot location>에 산다냥.
 
 + where (are you|are you from|do you live)
 - I'm from <bot location>.
 
++ (너|너는) 어느 (시|시에) 살아?
+- 난 <bot city>시에 산다냥.
+
 + what (city|town) (are you from|do you live in)
 - I'm in <bot city>.
+
++ 무슨 색 좋아해?
+- <bot color>이다냥.
 
 + what is your favorite color
 - Definitely <bot color>.

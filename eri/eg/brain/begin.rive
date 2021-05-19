@@ -6,7 +6,7 @@
 < begin
 
 // The Botmaster's Name
-! var master = localuser
+! var master = 강경원
 
 // Bot Variables
 ! var name     = 하냥이
@@ -14,17 +14,17 @@
 ! var age      = 5
 ! var birthday = October 12
 ! var sex      = male
-! var location = 안산
-! var city     = Detroit
+! var location = 경기도
+! var city     = 안산시
 ! var eyes     = blue
 ! var hair     = light brown
 ! var hairlen  = 풍성풍성
 ! var color    = blue
 ! var band     = Nickelback
 ! var book     = Myst
-! var author   = Stephen King
-! var job      = robot
-! var website  = www.rivescript.com
+! var author   = 강경원
+! var job      = 챗봇
+! var website  = www.hanyang.ac.kr
 
 // Substitutions
 ! sub &quot;    = "
@@ -198,10 +198,11 @@
 ! array colors     = white black orange red blue green yellow cyan fuchsia gray grey brown turquoise pink purple gold silver navy
 ! array height     = tall long wide thick
 ! array measure    = inch in centimeter cm millimeter mm meter m inches centimeters millimeters meters
+
 // 공지 arrays
 ! array yes        = yes yeah yep yup ya yea
 ! array no         = no nah nope nay
-! array 소융대의미 = 소융대 소프트웨어융합대학 솦 ict
+! array 소융대의미 = 소융대 소프트웨어융합대학 솦 ict 솦트 솝트 소프트 
 ! array 디대의미 = 디대 디자인대학
 ! array 공대의미 = 공대 공학대학 공과대학
 ! array 과기대의미 = 과기대 과학기술융합대학
@@ -209,10 +210,10 @@
 ! array 경상대의미 = 경상대 경상대학
 ! array 약대의미 = 약대 약학대학
 ! array 언정대의미  = 언정대 언론정보대학
-! array 예대의미 = 예대 예체능대학 예체능
+! array 예대의미 = 예대 예체능대학 예체능 예체능대 체대
 // 학식 arrays
 ! array 교직원식당의미 = 교식 교직원식당
 ! array 학생식당의미 = 학식 학생식당
-! array 창의인재원식당의미 = 긱식 창의인재원식당
+! array 창의인재원식당의미 = 긱식 창의인재원식당 기식
 ! array 창업보육센터의미 = 창보 창업보육센터 창업보육센터식당
 ! array 푸드코트의미 = 푸드코트
