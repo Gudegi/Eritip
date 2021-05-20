@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_fianl_prj/placedata.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 import 'dart:async';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+
 
 import 'package:flutter_fianl_prj/bdstructure/bd101.dart';
 import 'package:flutter_fianl_prj/bdstructure/bd102.dart';
@@ -32,7 +34,8 @@ class MapUniv extends StatefulWidget {
 class _MapUnivState extends State<MapUniv> {
   static const twilight_blue = const Color(0xff0b4c86);
   Completer<GoogleMapController> _controller=Completer();
-  GlobalKey<FormBuilderState> _fbkey=GlobalKey<FormBuilderState>();
+  GlobalKey<FormState> _fbkey=GlobalKey<FormState>();
+  TextEditingController _typeAheadController = TextEditingController();
   Set<Marker> _markers={};
 
   List<String> getSuggestion(String query){
@@ -67,9 +70,8 @@ class _MapUnivState extends State<MapUniv> {
   void _search() async{
     GoogleMapController controller = await _controller.future;
     _fbkey.currentState.save();
-    final inputValue=_fbkey.currentState.value;
-    final id=inputValue['buildingName'];
-
+    final inputValue=_typeAheadController.text;
+    final id=inputValue;
     final foundPlace=places.firstWhere(
             (place) => place['name']==id,
         orElse: ()=>null
@@ -99,8 +101,8 @@ class _MapUnivState extends State<MapUniv> {
 
   void _showbottomsheet(){
     _fbkey.currentState.save();
-    final inputValue=_fbkey.currentState.value;
-    final bd=inputValue['buildingName'];
+    final inputValue=_typeAheadController.text;//_fbkey.currentState.value;수정
+    final bd=inputValue;//'ㅁ';//inputValue['buildingName'];//수정
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -1032,9 +1034,7 @@ class _MapUnivState extends State<MapUniv> {
           );
         }
     );
-
   }
-
 
   void _onMapCreated(GoogleMapController controller){
     _controller.complete(controller);
@@ -1064,33 +1064,83 @@ class _MapUnivState extends State<MapUniv> {
               SizedBox(
                 width: (MediaQuery.of(context).size.width)*0.82,
                 height: (MediaQuery.of(context).size.height)*0.07,
-                child: FormBuilder(
-                  key: _fbkey,
-                  child: FormBuilderTypeAhead(
-                    attribute: 'buildingName',
-                    decoration: InputDecoration(
-                        hintText: '건물이름',
-                        filled:true,
-                        labelText: '건물명을 입력 후 검색버튼을 누르세요.',
-                        border: OutlineInputBorder(),
-                        fillColor: Colors.white,
-                    ),
-                    itemBuilder: (context,suggestion){
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Stack(
+                    children: <Widget>[
+                      Form(
+                      key: _fbkey,
+                      child:TypeAheadField(
+                        textFieldConfiguration: TextFieldConfiguration(
+                            autofocus: true,
+                            style: DefaultTextStyle.of(context).style.copyWith(
+                                fontStyle: FontStyle.normal
+                            ),
+                            controller: this._typeAheadController,
+                            decoration: InputDecoration(
+                              hintText: '건물명을 입력 후 선택하세요.',
+                              border: OutlineInputBorder(),
+                              fillColor: Colors.white,
+                              filled: true
+                            )
+                        ),
 
-                      return ListTile(
-                        title:Text(suggestion),
-                        subtitle:Text(_getsubtitle(suggestion)),
-                        leading: Icon(Icons.location_on_sharp),
-                        shape: RoundedRectangleBorder(),
-                      );
-                    },
-                    suggestionsCallback: (pattern){
-                      return getSuggestion(pattern);
-                    },
+                        itemBuilder: (context,suggestion){
+
+                          return ListTile(
+                            title:Text(suggestion),
+                            subtitle:Text(_getsubtitle(suggestion)),
+                            leading: Icon(Icons.location_on_sharp),
+                            shape: RoundedRectangleBorder(),
+                          );
+                        },
+                        suggestionsCallback: (pattern){
+                          return getSuggestion(pattern);
+                        },
+                        onSuggestionSelected: (suggestion) async {//search
+
+                            this._typeAheadController.text = suggestion;
+
+                            GoogleMapController controller = await _controller.future;
+                            final id=_typeAheadController.text;
+
+                            final foundPlace=places.firstWhere(
+                                    (place) => place['name']==id,
+                                orElse: ()=>null
+                            );
+                            var latAS=foundPlace['latitude'];
+                            var lngAS=foundPlace['longitude'];
+                            setState(() {
+                              _markers.clear();
+
+                              controller.animateCamera(CameraUpdate.newLatLng(LatLng(double.parse(latAS),double.parse(lngAS))));
+
+                              _markers.add(
+                                Marker(markerId: MarkerId('102'),
+                                  position: LatLng(double.parse(latAS), double.parse(lngAS)),
+                                  infoWindow: InfoWindow(
+                                      title: id,
+                                      snippet: '자세한 정보를 보시려면 클릭하세요',
+                                      onTap: _showbottomsheet
+                                  ),),
+                              );
+                            });
+                        },
+
+
+                      )
+                    ),
+                    Positioned(child: FlatButton(child: Icon(Icons.cancel,size: 20,color: Colors.grey,),
+                        onPressed: (){
+
+                          _fbkey.currentState.reset();
+                          _typeAheadController.clear();
+
+                        },minWidth:3),right: 0,)]
                   ),
                 ),
               ),
-              // FlatButton(onPressed: (){}, child: Text('엑스')),
+
               SizedBox(width: 4,),
               Container(
                 width: (MediaQuery.of(context).size.height)*0.07,height: (MediaQuery.of(context).size.height)*0.07,
