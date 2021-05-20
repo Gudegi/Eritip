@@ -151,7 +151,8 @@
         msg = '가이드북을 참고 해달라냥!'
         return msg
 
-    nlist.append(item[1:])
+    nlist.append(item[1])
+    nlist.append(item[2])
     return nlist
 < object
 
