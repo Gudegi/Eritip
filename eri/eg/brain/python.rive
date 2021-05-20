@@ -143,7 +143,7 @@
     what = args[0].replace(' ','')
     conn = pymysql.connect(host="database-eritip.cvgx9v3ektbw.ap-northeast-2.rds.amazonaws.com",user="admin",password='eritip18!',db='eridb', charset='utf8')
     cur = conn.cursor() 
-    cur.execute("SELECT" + what + " FROM infoLink")
+    cur.execute("SELECT * FROM infoLink WHERE keyword='"+what+"'")
     item = cur.fetchone()
     nlist = []
 

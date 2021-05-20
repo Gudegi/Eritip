@@ -116,6 +116,7 @@ class ChatLog(db.Model):
     bot = db.Column(db.String(100), nullable=False)
     date = db.Column(db.String(20), nullable=False)
 
+#각 정보 링크
 class InforLink(db.Model):
     __tablename__ = 'infoLink'
     idx = db.Column(db.Integer, primary_key=True)
