@@ -147,7 +147,7 @@
     item = cur.fetchone()
     nlist = []
 
-    if len(item) == 0:
+    if item == None:
         msg = '가이드북을 참고 해달라냥!'
         return msg
 
