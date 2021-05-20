@@ -108,10 +108,16 @@ class Haksik(db.Model):
     date = db.Column(db.String(20), nullable=False )
 
 
-
+#채팅 로그 테이블
 class ChatLog(db.Model):
     __tablename__ = 'chatLog'
     idx = db.Column(db.Integer, primary_key=True)
     client = db.Column(db.String(100))
     bot = db.Column(db.String(100), nullable=False)
     date = db.Column(db.String(20), nullable=False)
+
+class InforLink(db.Model):
+    __tablename__ = 'infoLink'
+    idx = db.Column(db.Integer, primary_key=True)
+    keyword = db.Column(db.String(20), nullable=False)
+    url = db.Column(db.String(500), nullable=False)

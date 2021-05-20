@@ -114,7 +114,7 @@
     where = args[0]
     nlist = []
     nlist.append(where)
-    
+
     if where == '푸드코트':
         msg = '푸드코트는 코로나19 상황 안정시까지 휴업이다냥.'
         return msg
@@ -134,6 +134,28 @@
         return msg
     return nlist
 < object
+
+
+> object informationLink python
+    # 각종 링크 전달용 인자는 원하는 정보에 대한 키워드 
+    import pymysql
+
+    what = args[0].replace(' ','')
+    conn = pymysql.connect(host="database-eritip.cvgx9v3ektbw.ap-northeast-2.rds.amazonaws.com",user="admin",password='eritip18!',db='eridb', charset='utf8')
+    cur = conn.cursor() 
+    cur.execute("SELECT" + what + " FROM infoLink")
+    item = cur.fetchone()
+    nlist = []
+
+    if len(item) == 0:
+        msg = '가이드북을 참고 해달라냥!'
+        return msg
+
+    nlist.append(item[1:])
+    return nlist
+< object
+
+
 
 
 + encode * in base64
@@ -244,3 +266,8 @@
 + * @창업보육센터의미 (메뉴|식단)*
 - <call>haksikNotice 창업보육센터</call>
 
++ *안내
+- <call>informationLink <star> </call>
+
++ * 안내
+- <call>informationLink <star> </call>
