@@ -113,7 +113,6 @@
     today = today.strftime('%Y.%m.%d')
     where = args[0]
     nlist = []
-    nlist.append(where)
 
     if where == '푸드코트':
         msg = '푸드코트는 코로나19 상황 안정시까지 휴업이다냥.'
@@ -129,7 +128,9 @@
         if i[5] == today:
             if i[1] == where:
                 nlist.append(i[1:6])
-    if len(nlist) == 0:
+    if len(nlist) != 0:
+        nlist.insert(0,where)            
+    else:
         msg = '오늘은 영업하지 않는다냥.'
         return msg
     return nlist
