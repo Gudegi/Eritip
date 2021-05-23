@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fianl_prj/shuttle_to.dart';
+import 'package:eritip/shuttle_to.dart';
 
 class Shuttle extends StatelessWidget {
   static const clear_blue = const Color(0xa31959e6);
@@ -21,7 +21,7 @@ class Shuttle extends StatelessWidget {
                 child: Text(
                   "셔틀 시간표",
                   style: TextStyle(
-                      fontFamily: "Gothic",
+                      fontFamily: "GodoM",
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
                       fontSize: 30.0,
@@ -30,32 +30,33 @@ class Shuttle extends StatelessWidget {
               )),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: brownish_grey, width: 1)),
             child: SizedBox(
                 child: FlatButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: EdgeInsets.zero,
-                    child: Text(
-                      '창의인재원 > 한대앞역',
-                      style: TextStyle(
-                          fontFamily: "Gothic",
-                          fontWeight: fontWeight1,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shuttle_1()));
-                    },
-                    color: light_grey,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ))),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              padding: EdgeInsets.zero,
+              child: Text(
+                '창의인재원 > 한대앞역',
+                style: TextStyle(
+                    fontFamily: "GothicA1",
+                    fontWeight: fontWeight1,
+                    fontSize: 25,
+                    color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Shuttle_1()));
+              },
+              color: Color(0xff6c95ef),
+            )),
           ),
           Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                   Row(
                     children: [
                       Text(
@@ -64,44 +65,48 @@ class Shuttle extends StatelessWidget {
                         style: TextStyle(
                             height: 1.5,
                             fontWeight: fontWeight2,
-                            fontFamily: "Gothic",
+                            fontFamily: "GothicA1",
                             fontStyle: FontStyle.normal,
                             fontSize: 17),
                       ),
                       shuttle1()
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                 ],
               )),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: brownish_grey, width: 1)),
             child: SizedBox(
                 width: (MediaQuery.of(context).size.width),
                 child: FlatButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: EdgeInsets.zero,
-                    child: Text(
-                      '창의인재원 > 예술인APT',
-                      style: TextStyle(
-                          fontFamily: "Gothic",
-                          fontWeight: fontWeight1,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shuttle_2()));
-                    },
-                    color: light_grey,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ))),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    '창의인재원 > 예술인APT',
+                    style: TextStyle(
+                        fontFamily: "GothicA1",
+                        fontWeight: fontWeight1,
+                        fontSize: 25,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Shuttle_2()));
+                  },
+                  color: Color(0xa31959e6),
+                )),
           ),
           Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                   Row(
                     children: [
                       Text(
@@ -110,44 +115,48 @@ class Shuttle extends StatelessWidget {
                         style: TextStyle(
                             height: 1.5,
                             fontWeight: fontWeight2,
-                            fontFamily: "Gothic",
+                            fontFamily: "GothicA1",
                             fontStyle: FontStyle.normal,
                             fontSize: 17),
                       ),
                       shuttle2()
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                 ],
               )),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: brownish_grey, width: 1)),
             child: SizedBox(
                 width: (MediaQuery.of(context).size.width),
                 child: FlatButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: EdgeInsets.zero,
-                    child: Text(
-                      '셔틀콕 > 한대앞역',
-                      style: TextStyle(
-                          fontFamily: "Gothic",
-                          fontWeight: fontWeight1,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shuttle_3()));
-                    },
-                    color: light_grey,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ))),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    '셔틀콕 > 한대앞역',
+                    style: TextStyle(
+                        fontFamily: "GothicA1",
+                        fontWeight: fontWeight1,
+                        fontSize: 25,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Shuttle_3()));
+                  },
+                  color: Color(0xa31959e6),
+                )),
           ),
           Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                   Row(
                     children: [
                       Text(
@@ -156,44 +165,48 @@ class Shuttle extends StatelessWidget {
                         style: TextStyle(
                             height: 1.5,
                             fontWeight: fontWeight2,
-                            fontFamily: "Gothic",
+                            fontFamily: "GothicA1",
                             fontStyle: FontStyle.normal,
                             fontSize: 17),
                       ),
                       shuttle3()
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                 ],
               )),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: brownish_grey, width: 1)),
             child: SizedBox(
                 width: (MediaQuery.of(context).size.width),
                 child: FlatButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: EdgeInsets.zero,
-                    child: Text(
-                      '셔틀콕 > 예술인APT',
-                      style: TextStyle(
-                          fontFamily: "Gothic",
-                          fontWeight: fontWeight1,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shuttle_4()));
-                    },
-                    color: light_grey,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ))),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    '셔틀콕 > 예술인APT',
+                    style: TextStyle(
+                        fontFamily: "GothicA1",
+                        fontWeight: fontWeight1,
+                        fontSize: 25,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Shuttle_4()));
+                  },
+                  color: Color(0xa31959e6),
+                )),
           ),
           Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                   Row(
                     children: [
                       Text(
@@ -202,44 +215,48 @@ class Shuttle extends StatelessWidget {
                         style: TextStyle(
                             height: 1.5,
                             fontWeight: fontWeight2,
-                            fontFamily: "Gothic",
+                            fontFamily: "GothicA1",
                             fontStyle: FontStyle.normal,
                             fontSize: 17),
                       ),
                       shuttle4()
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                 ],
               )),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: brownish_grey, width: 1)),
             child: SizedBox(
                 width: (MediaQuery.of(context).size.width),
                 child: FlatButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: EdgeInsets.zero,
-                    child: Text(
-                      '한대앞역',
-                      style: TextStyle(
-                          fontFamily: "Gothic",
-                          fontWeight: fontWeight1,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shuttle_5()));
-                    },
-                    color: light_grey,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ))),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    '한대앞역 > ',
+                    style: TextStyle(
+                        fontFamily: "GothicA1",
+                        fontWeight: fontWeight1,
+                        fontSize: 25,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Shuttle_5()));
+                  },
+                  color: Color(0xa31959e6),
+                )),
           ),
           Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                   Row(
                     children: [
                       Text(
@@ -248,44 +265,49 @@ class Shuttle extends StatelessWidget {
                         style: TextStyle(
                             height: 1.5,
                             fontWeight: fontWeight2,
-                            fontFamily: "Gothic",
+                            fontFamily: "GothicA1",
                             fontStyle: FontStyle.normal,
                             fontSize: 17),
                       ),
                       shuttle5()
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
                 ],
               )),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: brownish_grey, width: 1)),
             child: SizedBox(
                 width: (MediaQuery.of(context).size.width),
                 child: FlatButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: EdgeInsets.zero,
-                    child: Text(
-                      '예술인 APT',
-                      style: TextStyle(
-                          fontFamily: "Gothic",
-                          fontWeight: fontWeight1,
-                          fontSize: 25,
-                          color: Colors.black),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Shuttle_6()));
-                    },
-                    color: light_grey,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
-                    ))),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: EdgeInsets.zero,
+                  child: Text(
+                    '예술인 APT >',
+                    style: TextStyle(
+                        fontFamily: "GothicA1",
+                        fontWeight: fontWeight1,
+                        fontSize: 25,
+                        color: Colors.black),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Shuttle_6()));
+                  },
+                  color: Color(0xa31959e6),
+                )),
           ),
           Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                  ),
+                  //divider의 패딩부분
                   Row(
                     children: [
                       Text(
@@ -294,12 +316,15 @@ class Shuttle extends StatelessWidget {
                         style: TextStyle(
                             height: 1.5,
                             fontWeight: fontWeight2,
-                            fontFamily: "Gothic",
+                            fontFamily: "GothicA1",
                             fontStyle: FontStyle.normal,
                             fontSize: 17),
                       ),
                       shuttle6()
                     ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(5),
                   ),
                 ],
               )),

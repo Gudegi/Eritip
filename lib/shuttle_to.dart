@@ -3422,7 +3422,7 @@ class Shuttle_1 extends StatelessWidget { //창의 > 한대
                 backgroundColor: clear_blue,
                 title: Center(child: Text("창의관 → 한대앞",
                     style:TextStyle(
-                        fontFamily: "Gothic",
+                        fontFamily: "GothicA1",
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
                         fontSize: 30.0,
@@ -3435,14 +3435,14 @@ class Shuttle_1 extends StatelessWidget { //창의 > 한대
                     tabs: [
                       Tab(
                           child:Text('평일',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
                           )
                       ),Tab(
                           child:Text('주말',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
@@ -3660,9 +3660,9 @@ class Shuttle_2 extends StatelessWidget {  //창의 > 예술
           child : Scaffold(
               appBar: AppBar(
                 backgroundColor: clear_blue,
-                title: Center(child: Text("창의인재원 → 예술인APT",
+                title: Center(child: Text("창의인재원 → 예술인",
                     style:TextStyle(
-                        fontFamily: "Gothic",
+                        fontFamily: "GothicA1",
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
                         fontSize: 30.0,
@@ -3675,14 +3675,14 @@ class Shuttle_2 extends StatelessWidget {  //창의 > 예술
                     tabs: [
                       Tab(
                           child:Text('평일',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
                           )
                       ),Tab(
                           child:Text('주말',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
@@ -3905,7 +3905,7 @@ class Shuttle_3 extends StatelessWidget { //셔틀 > 한대
                 backgroundColor: clear_blue,
                 title: Center(child: Text("셔틀콕 → 한대앞역",
                     style:TextStyle(
-                        fontFamily: "Gothic",
+                        fontFamily: "GothicA1",
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
                         fontSize: 30.0,
@@ -3918,14 +3918,14 @@ class Shuttle_3 extends StatelessWidget { //셔틀 > 한대
                     tabs: [
                       Tab(
                           child:Text('평일',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
                           )
                       ),Tab(
                           child:Text('주말',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
@@ -4148,7 +4148,7 @@ class Shuttle_4 extends StatelessWidget { //셔틀 > 한대
                 backgroundColor: clear_blue,
                 title: Center(child: Text("셔틀콕 → 예술인",
                     style: TextStyle(
-                        fontFamily: "Gothic",
+                        fontFamily: "GothicA1",
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
                         fontSize: 30.0,
@@ -4161,14 +4161,14 @@ class Shuttle_4 extends StatelessWidget { //셔틀 > 한대
                     tabs: [
                       Tab(
                           child: Text('평일',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
                           )
                       ), Tab(
                           child: Text('주말',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
@@ -4520,7 +4520,7 @@ class Shuttle_5 extends StatelessWidget { //한대앞
                 backgroundColor: clear_blue,
                 title: Center(child: Text("한대앞역",
                     style:TextStyle(
-                        fontFamily: "Gothic",
+                        fontFamily: "GothicA1",
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
                         fontSize: 30.0,
@@ -4533,14 +4533,14 @@ class Shuttle_5 extends StatelessWidget { //한대앞
                     tabs: [
                       Tab(
                           child:Text('평일',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
                           )
                       ),Tab(
                           child:Text('주말',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
@@ -4764,7 +4764,7 @@ class Shuttle_6 extends StatelessWidget { //예술인
                 backgroundColor: clear_blue,
                 title: Center(child: Text("셔틀콕 → 예술인",
                     style: TextStyle(
-                        fontFamily: "Gothic",
+                        fontFamily: "GothicA1",
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
                         fontSize: 30.0,
@@ -4777,14 +4777,14 @@ class Shuttle_6 extends StatelessWidget { //예술인
                     tabs: [
                       Tab(
                           child: Text('평일',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),
                           )
                       ), Tab(
                           child: Text('주말',
-                            style: TextStyle(fontFamily: "Gothic",
+                            style: TextStyle(fontFamily: "GothicA1",
                                 fontWeight: FontWeight.w700,
                                 fontSize: 25,
                                 color: Colors.black),

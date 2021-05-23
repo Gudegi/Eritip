@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fianl_prj/chatmessage.dart';
 import 'package:logger/logger.dart';
 import 'dart:convert';
 import 'dart:ui';
@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:date_format/date_format.dart';
+import 'package:web_browser/web_browser.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -21,7 +22,8 @@ class _HomeState extends State<Home> {
   var curTime = formatDate(DateTime.now(), [am, ' ', hh, ':', nn]);
   var timeText = TextStyle(color: Colors.black, fontSize: 10);
   var linkText = TextStyle(color: Colors.blue, fontSize: 12); //링크용 스타일
-  var defaultText = TextStyle(color: Colors.black, fontSize: 12); //일반텍스트용 스타
+  var defaultText = TextStyle(color: Colors.black, fontSize: 12); //일반텍스트용 스타일
+  ScrollController _scrollController = new ScrollController();
   List<String> _data = [];
   List<String> _data2 = [];
   bool turn = false;
@@ -31,15 +33,16 @@ class _HomeState extends State<Home> {
   void _handleSubmitted(String text) {
     Logger().d(text); //디버깅용 로그 만드는법
     _textEditingController.clear();
-    ChatMessage newChat = ChatMessage(text);
-    setState(() {
-      _chats.insert(0, newChat);
-    });
+    //ChatMessage newChat = ChatMessage(text);
+    //setState(() {
+    //_chats.insert(0, newChat);}
+    //);
   }
 
   TextEditingController _textEditingController = TextEditingController();
   TextEditingController _queryController = TextEditingController();
-  List<ChatMessage> _chats = [];
+
+  //List<ChatMessage> _chats = [];
   String major = '전공';
 
   //9-11 1번
@@ -52,18 +55,10 @@ class _HomeState extends State<Home> {
             Container(
               color: clear_blue_64,
               child: Stack(children: <Widget>[
-                Image.asset('images/mainhyimg.png'),
+                Image.asset('images/mainhyimg2.png'),
                 Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.height) * 0.124),
-                      child: Text("하냥이 봇",
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black87)),
-                    )),
+                  alignment: FractionalOffset.bottomCenter,
+                ),
               ]),
             ),
             Expanded(
@@ -71,6 +66,8 @@ class _HomeState extends State<Home> {
                 // key to call remove and insert from anywhere
                 reverse: false,
                 key: _listKey,
+                shrinkWrap: true,
+                controller: _scrollController,
                 initialItemCount: _data.length,
                 itemBuilder:
                     (BuildContext context, int index, Animation animation) {
@@ -88,18 +85,18 @@ class _HomeState extends State<Home> {
                     FlatButton(
                       minWidth: 20,
                       child: Icon(
-                        Icons.menu_rounded,
-                        color: Colors.black,
+                        Icons.menu_outlined,
+                        color: twilight_blue,
                         size: 25,
                       ),
                       onPressed: () {
-                        print('사이드바이용');
+                        _showbottomsheet(context);
                       },
                     ),
                     Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Hello",
+                        decoration: InputDecoration(hintStyle:TextStyle(fontFamily: 'GodoM') ,
+                          hintText: "하냥이에게 채팅하기",
                         ),
                         controller: _queryController,
                         textInputAction: TextInputAction.send,
@@ -114,7 +111,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         this._getResponse();
                       },
-                      child: Icon(Icons.arrow_right, size: 30),
+                      child: Icon(Icons.arrow_right, size: 30, color: twilight_blue),
                       color: Colors.blueAccent,
                     ),
                   ],
@@ -148,21 +145,30 @@ class _HomeState extends State<Home> {
                 //에러가 나오는 경우 > list타입인 경우(공지, 학식들)
                 Map<String, dynamic> data = jsonDecode(response.body);
                 List<dynamic> data2 = data['response'];
-                for (int i = 0; i < data2.length; i++) {
-                  //각 항목들을 구분하기위하여 모든 아이템 뒤에 //추가
-                  for (int j = 0; j < data2[i].length; j++) {
-                    data2[i][j] = data2[i][j].toString() + "/./";
+
+                try {
+                  for (int i = 0; i < data2.length; i++) {
+                    //각 항목들을 구분하기위하여 모든 아이템 뒤에 //추가
+                    for (int j = 0; j < data2[i].length; j++) {
+                      data2[i][j] = data2[i][j].toString() + "/./";
+                    }
                   }
+                } catch (e) {
+                  //길이가 1 , 안
+                  data2[0] = data2[0].toString() + "<bot>3";
+                  print(data2);
+                  _insertMultiItem(data2);
                 }
-                if (data2.length == 6) {
+                if (data2.length == 8) {
                   for (int i = 0; i < data2.length; i++) {
                     data2[i] = data2[i].toString() + "<bot>1";
                     print(data2[i]);
                   }
                   print(data2.length);
                   _insertMultiItem(data2);
-                } else {
+                } else if (data2.length > 1 && data2.length < 8) {
                   for (int i = 0; i < data2.length; i++) {
+                    //나머지 > 학식
                     data2[i] = data2[i].toString() + "<bot>2";
                     print(data2[i]);
                   }
@@ -186,12 +192,21 @@ class _HomeState extends State<Home> {
     print(_data.length);
     print(_data);
     _listKey.currentState.insertItem(_data.length - 1);
+    Future.delayed(
+      Duration(milliseconds: 500),
+      () {
+        //1초 동안 마지막 위치로 애니매이션 효과를 주면서 이동
+        _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 1),
+            curve: Curves.fastOutSlowIn);
+      },
+    );
   }
 
   void _insertMultiItem(List message) {
-    if (message.length == 6) {
-      //대학 공지는 6개  총 길이 6
-      for (int i = 0; i < 6; i++) {
+    if (message.length == 8) {
+      //대학 공지는 8개  총 길이 8
+      for (int i = 0; i < 8; i++) {
         _data.add(message[i].toString());
         _listKey.currentState.insertItem(_data.length - 1);
       }
@@ -203,18 +218,22 @@ class _HomeState extends State<Home> {
         _listKey.currentState.insertItem(_data.length - 1);
       }
     }
-    /*for (int i = 0; i <= 2; i++) {
-      _data.add(message[0][3]);
-      _listKey.currentState.insertItem(_data.length - 1);
-      print(_data.length);
-      print(_data);
-    }*/
+    Future.delayed(
+      Duration(milliseconds: 1000),
+      () {
+        //1 동안 마지막 위치로 애니매이션 효과를 주면서 이동
+        _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 1),
+            curve: Curves.fastOutSlowIn);
+      },
+    );
   }
 
   Widget _buildItem(String item, Animation animation, int index) {
     bool mine = item.endsWith("<bot>"); // <bot>으로 끝나면 봇꺼
     bool notice = item.endsWith("<bot>1"); // 공지용 구분
     bool haksik = item.endsWith("<bot>2"); // 학식용
+    bool annae = item.endsWith("<bot>3"); // 안내용
     return SizeTransition(
       sizeFactor: animation,
       child: Padding(
@@ -222,7 +241,9 @@ class _HomeState extends State<Home> {
             ? EdgeInsets.only(top: 0.1)
             : haksik
                 ? EdgeInsets.only(top: 0.1)
-                : EdgeInsets.only(top: 10),
+                : annae
+                    ? EdgeInsets.only(top: 0.1)
+                    : EdgeInsets.only(top: 10),
         child: notice //공지용
             ? Container(
                 decoration: BoxDecoration(
@@ -271,7 +292,7 @@ class _HomeState extends State<Home> {
                           .replaceAll("<bot>1", "")
                           .split("/./, ")[3]
                           .replaceAll("/./]", "")),
-                      padding: EdgeInsets.only(left:2, right: 2),
+                      padding: EdgeInsets.only(left: 2, right: 2),
                     ),
                   ],
                 ),
@@ -325,37 +346,49 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   )
-                : Container(
-                    //alignment: mine ? Alignment.topLeft : Alignment.topRight,
-                    child: Wrap(
-                      /*mainAxisAlignment: mine
+                : annae
+                    ? Container(
+                        constraints: BoxConstraints(maxHeight: 450),
+                        child: WebBrowser(
+                          initialUrl: item.replaceAll("<bot>3", ""),
+                          javascriptEnabled: true,
+                        ),
+                      )
+                    : Container(
+                        child: Wrap(
+                          /*mainAxisAlignment: mine
                             ? MainAxisAlignment.start
                             : MainAxisAlignment.end,*/
-                      alignment: mine ? WrapAlignment.start : WrapAlignment.end,
-                      children: [
-                        Bubble(
-                          shadowColor: Colors.black,
-                          elevation: 4,
-                          nipWidth: 7,
                           alignment:
-                              mine ? Alignment.topLeft : Alignment.topRight,
-                          stick: true,
-                          nipOffset: 6,
-                          nip: mine ? BubbleNip.leftTop :BubbleNip.rightTop,
-                          child: Text(item.replaceAll("<bot>", "")),
-                          color: mine ? Color(0xfff4f4f4) : Color(0xff6c95ef),
-                          padding: BubbleEdges.all(10),
+                              mine ? WrapAlignment.start : WrapAlignment.end,
+                          children: [
+                            Bubble(
+                              shadowColor: Colors.black,
+                              elevation: 4,
+                              nipWidth: 7,
+                              alignment:
+                                  mine ? Alignment.topLeft : Alignment.topRight,
+                              stick: true,
+                              nipOffset: 6,
+                              nip:
+                                  mine ? BubbleNip.leftTop : BubbleNip.rightTop,
+                              child: Text(item.replaceAll("<bot>", "")),
+                              color:
+                                  mine ? Color(0xfff4f4f4) : Color(0xff6c95ef),
+                              padding: BubbleEdges.all(10),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10, right: 10, top: 5, bottom: 3),
+                              child: RichText(
+                                textAlign:
+                                    mine ? TextAlign.start : TextAlign.end,
+                                text: TextSpan(text: curTime, style: timeText),
+                              ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left:10, right:10, top:5, bottom: 3),
-                          child: RichText(
-                            textAlign: mine ? TextAlign.start : TextAlign.end,
-                            text: TextSpan(text: curTime, style: timeText),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
       ),
     );
   }
@@ -371,3 +404,102 @@ Future<void> _launchWebView(String url) async {
     throw 'Could not launch $url';
   }
 }
+
+void _showbottomsheet(context) {
+  showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+      context: context,
+      isScrollControlled: true,
+      builder: buildBottomSheet);
+}
+
+const twilight_blue = const Color(0xff0b4c86);
+
+Widget buildBottomSheet(BuildContext context) {
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      SizedBox(
+        height: 5,
+      ),
+      Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+        TextButton(
+          child: Icon(Icons.close_rounded, size: 30),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ]),
+      Container(
+        child: Text(
+          '사용 안내\n',
+          style: TextStyle(
+            fontFamily: "GodoM",
+            fontWeight: FontWeight.w700,
+            fontSize: 25,
+            color: twilight_blue,
+            fontStyle: FontStyle.normal,
+          ),
+        ),
+      ),
+      Container(
+        child: Text(
+          '하냥이에게 무엇이든 물어보세요!\n ',
+          style: TextStyle(
+            fontFamily: "GothicA1",
+            fontWeight: FontWeight.w700,
+            fontSize: 17,
+            color: Colors.black,
+            fontStyle: FontStyle.normal,
+          ),
+        ),
+      ),
+      Container(
+        child: Text(
+            '1.   "'
+            "{단과대학} 공지"
+            '" 입력으로 공지사항을 불러옵니다.\n ex) 소융대 공지, 소프트 공지, 디대 공지, 공대 공지\n',
+            style: TextStyle(
+              fontFamily: "GothicA1",
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+              color: Colors.black,
+              fontStyle: FontStyle.normal,
+            ),
+            textAlign: TextAlign.center),
+      ),
+      Container(
+        child: Text(
+            '2.    "'
+            " {교내식당} 메뉴|식단"
+            '"  입력으로 금일 메뉴를 불러옵니다.\n ex) 창업보육센터 식단, 창의인재원식당 메뉴, 창보 메뉴\n',
+            style: TextStyle(
+              fontFamily: "GothicA1",
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+              color: Colors.black,
+              fontStyle: FontStyle.normal,
+            ),
+            textAlign: TextAlign.center),
+      ),
+      Container(
+        child: Text(
+            '3.    "'
+            " {*} 안내"
+            '"  입력으로 홈페이지 내의 페이들을 불러옵니다.\n ex) 학사 안내, 복지매장 안내, 장학 안내, 입학처 안내\n ',
+            style: TextStyle(
+              fontFamily: "GothicA1",
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+              color: Colors.black,
+              fontStyle: FontStyle.normal,
+            ),
+            textAlign: TextAlign.center),
+      ),
+      SizedBox(height: 70),
+    ],
+  );
+}
+//

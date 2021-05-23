@@ -6,32 +6,35 @@ import 'package:eritip/map.dart';
 import 'package:eritip/setting.dart';
 import 'package:eritip/shuttle.dart';
 
-
-
-
-class ChatApp extends StatefulWidget {
+class BottomNav extends StatefulWidget {
   @override
-  _ChatAppState createState() => _ChatAppState();
+  _BottomNavState createState() => _BottomNavState();
 }
 
-class _ChatAppState extends State<ChatApp> {
-  List<Widget> _widgetOptions = <Widget>[Home(),MapUniv(),Food(),Shuttle(),Setting()];
+class _BottomNavState extends State<BottomNav> {
+  List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    MapUniv(),
+    Food(),
+    Shuttle(),
+    Setting()
+  ];
+
   //1번
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      });
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body:_widgetOptions.elementAt(_selectedIndex),
-            //2번
+        body: _widgetOptions.elementAt(_selectedIndex),
+        //2번
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -57,13 +60,14 @@ class _ChatAppState extends State<ChatApp> {
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.blueAccent,
+          selectedLabelStyle: TextStyle(fontFamily: 'GodoM'),
+          unselectedLabelStyle: TextStyle(fontFamily: 'GodoM'),
           unselectedItemColor: Colors.blueGrey,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           onTap: _onItemTapped,
-        )//bottomnavi,
+        ), //bottomnavi,
       ),
     );
   }
-
 }
