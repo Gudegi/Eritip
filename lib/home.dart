@@ -488,7 +488,7 @@ Widget buildBottomSheet(BuildContext context) {
         child: Text(
             '3.    "'
             " {*} 안내"
-            '"  입력으로 홈페이지 내의 페이들을 불러옵니다.\n ex) 학사 안내, 복지매장 안내, 장학 안내, 입학처 안내\n ',
+            '"  입력으로 홈페이지 내의 페이지들을 불러옵니다.\n ex) 학사 안내, 복지매장 안내, 장학 안내, 입학처 안내\n ',
             style: TextStyle(
               fontFamily: "GothicA1",
               fontWeight: FontWeight.w700,
