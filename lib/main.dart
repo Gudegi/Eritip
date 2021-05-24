@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       color: twilight_blue)),
             ),
             Image.asset(
-              'images/splash.png',
+              'images/splash_hy2.png',
               width: (MediaQuery.of(context).size.height) * 0.4,
               height: (MediaQuery.of(context).size.height) * 0.4,
             ),

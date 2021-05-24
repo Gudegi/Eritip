@@ -31,7 +31,7 @@ class Ready2Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'images/loginhyimg.png',
+                'images/login_hy-img2.png',
                 width: (MediaQuery
                     .of(context)
                     .size
@@ -44,7 +44,7 @@ class Ready2Login extends StatelessWidget {
           ),
           Text('에리카의 모든 팁, 에리팁',
               style: TextStyle(
-                  fontFamily: "GothicA1Bold",
+                  fontFamily: "GodoM",
                   fontWeight: FontWeight.bold,
                   fontSize: 27,
                   color: twilight_blue)),
@@ -80,9 +80,9 @@ class Ready2Login extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Image.asset('images/symbol.png'),
+                    Image.asset('images/HYU_symbol_basic_png.png',width: 43,),
                     SizedBox(
-                      width: 40,
+                      width: (MediaQuery.of(context).size.width) * 0.1,
                     ),
                     Text('하냥이와 대화하기',
                         style: TextStyle(
@@ -92,6 +92,9 @@ class Ready2Login extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                             fontSize: 20.0),
                         textAlign: TextAlign.center),
+                    SizedBox(
+                      width: (MediaQuery.of(context).size.width) * 0.17,
+                    ),
                   ],
                 ),
                 onPressed: () {

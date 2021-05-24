@@ -59,7 +59,6 @@ flutter:
   assets:
     - images/
     - images/splash.png
-    - images/mainhyimg.png
     - images/loginhyimg.png
     - images/symbol.png
     - images/101desc1st.png
@@ -222,9 +221,10 @@ flutter:
     - images/311img4th.png
     - images/311img5th.png
     - images/311img6th.png
-    - images/map_pin_line.png
-    - images/map_pin_line_blue.png
     - images/mainhyimg2.png
+    - images/HYU_symbol_basic_png.png
+    - images/login_hy-img2.png
+    - images/splash_hy2.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
