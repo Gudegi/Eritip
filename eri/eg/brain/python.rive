@@ -235,10 +235,6 @@
 
 
 
-
-+ *
-- <call>recommendInfer <star></call>
-
 + encode * in base64
 - OK: <call>base64 <star></call>
 

@@ -3,6 +3,7 @@ from eri.models import User
 from rivescript import RiveScript   
 from eri import db
 from eri.models import ChatLog
+from eri.infer_word2vec import CosineW2V
 import re, json, os, ast, datetime
 
 #로컬에는 라이브스크립트 없다.
@@ -28,7 +29,18 @@ def response():
     
     reply = bot.reply("localuesr", msg)
     ## 진행사항- 로그를 남기려 하는데 평문은 그대로 박으면 된다. 하지만 리스트인 경우(공지, 밥) 어떻게 처리할까?
-    
+    if reply == '잘 이해를 못했다냥.. 혹시 이중에 찾는게 있냥?':
+        try:
+            cos = CosineW2V()
+            result = cos.infer(msg)
+            result.insert(0,reply)
+            log = ChatLog(client=msg, bot=result[1][0]+result[2][0]+result[3][0], date=today)
+            db.session.add(log)
+            db.session.commit()
+            params = {"response": result}
+        except Exception as e:
+            print(e)
+
 
     try:   #리스트 형태인 경우  > 리스트로 변환
         reply = ast.literal_eval(reply)
