@@ -1,7 +1,7 @@
 FROM python:3.7.6
 
 
-RUN /usr/local/bin/python -m pip install pip==21.0.1 && \ 
+RUN /usr/local/bin/python -m pip install pip==21.1.2 && \ 
     pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
@@ -12,7 +12,7 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 && \
     pip install pymysql   &&\
     pip install pandas   &&\
     pip install gensim==3.6.0   &&\
-    pip install konlpy==0.5.2  &&\
+    pip install konlpy==0.5.2
 
 
 ENV FLASK_APP=eri
