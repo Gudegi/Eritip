@@ -11,8 +11,8 @@ class CosineW2V():
 
     def __init__(self):
         cwd = os.getcwd() 
-        self.df = pd.read_csv(cwd+'/eg/brain/Dataset/EIRTIP_data2.csv')
-        self.word2vec_model = Word2Vec.load(cwd+'/eg/brain/Model/ERITIPNotice_epoch15_min2_win2_demension200.bin')
+        self.df = pd.read_csv(cwd+'/eri/eg/brain/Dataset/EIRTIP_data2.csv')
+        self.word2vec_model = Word2Vec.load(cwd+'/eri/eg/brain/Model/ERITIPNotice_epoch15_min2_win2_demension200.bin')
         self.kkma = Kkma()
 
     def tokenizer_kkma2(self, doc):
