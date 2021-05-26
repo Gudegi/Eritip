@@ -48,6 +48,7 @@ def response():
             params = {"response": e}
             result = json.dumps(params, ensure_ascii=False)
             res = make_response(result)
+            return res
 
 
 
