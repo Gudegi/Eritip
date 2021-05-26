@@ -11,7 +11,8 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 && \
     pip install pymysql   &&\
     pip install pandas   &&\
     pip install gensim==3.6.0   &&\
-    pip install konlpy==0.5.2
+    pip install konlpy==0.5.2  &&\
+    pip install scikit-learn==23.2
 
 
 ENV FLASK_APP=eri
