@@ -29,28 +29,20 @@ def response():
     
     reply = bot.reply("localuesr", msg)
     ## 진행사항- 로그를 남기려 하는데 평문은 그대로 박으면 된다. 하지만 리스트인 경우(공지, 밥) 어떻게 처리할까?
-    if reply[-1] == 2:
-        try:
-            cos = CosineW2V()
-            infer_result = cos.infer(msg)
-            infer_result.insert(0,reply)
-            msg2 = infer_result[1][0]+infer_result[2][0]+infer_result[3][0]
-            log = ChatLog(client=msg, bot=msg2, date=today)
-            db.session.add(log)
-            db.session.commit()
-            params = {"response": infer_result}
-            result = json.dumps(params, ensure_ascii=False)
-            res = make_response(result)
+    if reply[-1] == '2':
+        cos = CosineW2V()
+        reply = reply.replace('2','')
+        infer_result = cos.infer(msg)
+        infer_result.insert(0,reply)
+        msg2 = (infer_result[1][0]+infer_result[2][0]+infer_result[3][0]).replace(' ',',')
+        log = ChatLog(client=msg, bot=msg2, date=today)
+        db.session.add(log)
+        db.session.commit()
+        params = {"response": infer_result}
+        result = json.dumps(params, ensure_ascii=False)
+        res = make_response(result)
 
-            return res
-        except Exception as e:
-            print('------------0-----------------')
-            params = {"response": e}
-            result = json.dumps(params, ensure_ascii=False)
-            res = make_response(result)
-            return res
-
-
+        return res
 
     try:   #리스트 형태인 경우  > 리스트로 변환
         reply = ast.literal_eval(reply)
