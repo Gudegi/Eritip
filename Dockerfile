@@ -1,7 +1,8 @@
 FROM python:3.7.6
 
 
-RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\ 
+RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
+    apt-get update &&\
     apt-get install openjdk-8-jdk &&\
     pip install flask &&\ 
     pip install mysql-connector-python &&\
