@@ -9,7 +9,9 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 && \
     pip install gunicorn &&\
     pip install rivescript &&\
     pip install pymysql   &&\
-    pip install pandas
+    pip install pandas   &&\
+    pip install gensim   &&\
+    pip install konlpy 
 
 
 ENV FLASK_APP=eri

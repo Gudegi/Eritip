@@ -15,10 +15,8 @@ services:
             context: .
             dockerfile: Dockerfile
         command: gunicorn --bind 0:5000 "eri:create_app()"
-        #gunicorn <django_project>.wsgi:application --bind 0.0.0.0:8000 
+        
         volumes:
              - .:/home/eritip
-        #expose: 
-        #    - "8000"
         ports:
             - "5000:5000"

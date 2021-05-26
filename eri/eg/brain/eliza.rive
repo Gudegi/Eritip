@@ -1,8 +1,8 @@
 // A generic set of chatting responses. This set mimicks the classic Eliza bot.
 
-+ *
-- 무슨 말인지 잘 모르겠다냥
-- 잘 이해를 못했다냥..
+//+ *
+//- 무슨 말인지 잘 모르겠다냥
+//- 잘 이해를 못했다냥..
 
 + [*] (미안|사과할게|미안해) [*]
 - 아니다냥 괜찮다냥

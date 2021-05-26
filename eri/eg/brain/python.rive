@@ -158,7 +158,85 @@
 < object
 
 
+> object recommendInfer python
+    string = args[0]
+    result = []
 
+    #추천 시스템
+    import os
+    import pandas as pd
+    import gensim.models.word2vec import word2vec
+    import jpype
+    from konlpy.tag import Kkma
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    cwd = os.getcwd() #eritip/eg/brain
+    df = pd.read_csv(cwd+'/Dataset'+'/ERITIP_data2.csv')
+    word2vec_model = Word2Vec.load(cwd+'/Model/ERITIPNotice_epoch15_min2_win2_demension200.bin')
+    
+    kkma = Kkma()
+
+    def tokenizer_kkma2(doc):
+        jpype.attachThreadToJVM()
+        token_doc = [ word[0] for word in kkma.pos(doc) ]
+        return token_doc
+
+    def token_except2(df):
+        idx = 0
+        token_except = []
+        for i in range(len(df)):
+        token_except.append( tokenizer_kkma2(df['Q'][i]))
+        return token_except
+    
+    def vectors(document_list):
+        document_embedding_list = []
+
+        # 각 문서에 대해서
+        idx = 0
+        for line in document_list:
+            doc2vec = None
+            for word in line:
+                if word in word2vec_model.wv.vocab:
+                    count += 1
+                    # 해당 문서에 있는 모든 단어들의 벡터값을 더한다.
+                    if doc2vec is None:
+                        doc2vec = word2vec_model[word]
+                    else:
+                        doc2vec = doc2vec + word2vec_model[word]
+
+            if doc2vec is not None:
+                # 단어 벡터를 모두 더한 벡터의 값을 문서 길이로 나눠준다.
+                doc2vec = doc2vec / count
+                document_embedding_list.append(doc2vec)
+
+        # 각 문서에 대한 문서 벡터 리스트를 리턴
+        return document_embedding_list
+
+
+    tokenized_df = token_except2(df)
+    document_embedding_list = vectors(tokenized_df)
+    tokenized_string = [tokenizer_kkma2(string)]
+    embedding_string = vectors(tokenized_string)
+
+    cosine_list = cosine_similarity(document_embedding_list, embedding_string)
+
+    idx_cos_list = []
+    for i in range(len(cosine_list)):
+        idx_cos_list.append([cosine_list[i], i])
+    idx_cos_list = sorted(idx_cos_list, reverse=True)
+
+    for i in range(3):
+        result.append([df.iloc[idx_cos_list[i][1]]['A'], idx_cos_list[i]])
+    
+    return result
+
+< object
+
+
+
+
++ *
+- <call>recommendInfer <star></call>
 
 + encode * in base64
 - OK: <call>base64 <star></call>
