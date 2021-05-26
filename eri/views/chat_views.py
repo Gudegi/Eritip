@@ -32,12 +32,16 @@ def response():
     if reply == '잘 이해를 못했다냥.. 혹시 이중에 찾는게 있냥?':
         try:
             cos = CosineW2V()
-            result = cos.infer(msg)
-            result.insert(0,reply)
-            log = ChatLog(client=msg, bot=result[1][0]+result[2][0]+result[3][0], date=today)
+            infer_result = cos.infer(msg)
+            infer_result.insert(0,reply)
+            log = ChatLog(client=msg, bot=infer_result[1][0]+infer_result[2][0]+infer_result[3][0], date=today)
             db.session.add(log)
             db.session.commit()
-            params = {"response": result}
+            params = {"response": infer_result}
+            result = json.dumps(params, ensure_ascii=False)
+            res = make_response(result)
+
+            return res
         except Exception as e:
             print(e)
 
