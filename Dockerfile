@@ -1,7 +1,7 @@
 FROM python:3.7.6
 
 
-RUN /usr/local/bin/python -m pip install pip==21.1.2 && \ 
+RUN /usr/local/bin/python -m pip install pip==21.0.1 && \ 
     pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
