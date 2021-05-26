@@ -1,8 +1,10 @@
 FROM python:3.7.6
 
-RUN apt-get update &&\
-    apt-get install yum &&\
-    yum install java-1.8.0-openjdk.x86_64 
+RUN apt-get update && \
+     apt-get install -y openjdk-8-jdk-headless && \
+    rm -rf /var/lib/apt/lists/*
+ENV JAVA_HOME  /usr/lib/jvm/java-8-openjdk-amd64/
+
 RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
     pip install flask &&\ 
     pip install mysql-connector-python &&\
