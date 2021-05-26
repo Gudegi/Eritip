@@ -10,8 +10,8 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 && \
     pip install rivescript &&\
     pip install pymysql   &&\
     pip install pandas   &&\
-    pip install gensim   &&\
-    pip install konlpy 
+    pip install gensim==3.6.0   &&\
+    pip install konlpy==0.5.2
 
 
 ENV FLASK_APP=eri
