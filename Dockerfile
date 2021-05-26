@@ -2,7 +2,7 @@ FROM python:3.7.6
 
 
 RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
-    apt-get install software-properties-common &&\
+    apt-get install python-software-properties &&\
     add-apt-repository ppa:webupd8team/java  &&\
     apt-get update &&\
     apt-get install oracle-java8-installer &&\
