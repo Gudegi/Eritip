@@ -2,8 +2,11 @@ FROM python:3.7.6
 
 
 RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
+    apt-get install software-properties-common &&\
+    add-apt-repository ppa:webupd8team/java  &&\
     apt-get update &&\
-    apt-get install openjdk-8-jdk &&\
+    apt-get install oracle-java8-installer &&\
+    update-java-alternatives --set java-8-oracle &&\
     pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
