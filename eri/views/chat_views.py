@@ -3,10 +3,27 @@ from eri.models import User
 from rivescript import RiveScript   
 from eri import db
 from eri.models import ChatLog
-from eri.infer_word2vec import CosineW2V
 import re, json, os, ast, datetime
+import pandas as pd
+import numpy as np
+import jpype
+from konlpy.tag import Kkma
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
 
-#로컬에는 라이브스크립트 없다.
+cwd = os.getcwd()
+model = load_model(cwd+'/eri/eg/brain/Model/ERITIP_1DCNN.h5')
+noun_kkm = ['NNP', 'NNG', 'OL', 'NP','VV', 'VA' ] #꼬꼬마에서 명사들 품사
+kkma = Kkma()
+tokenizer = Tokenizer()
+#품사 태깅 제거 명사 토크나이징
+def tokenizer_kkma_noun2(doc):
+  jpype.attachThreadToJVM()
+  token_doc = [ word[0] for word in kkma.pos(doc) if word[1] in noun_kkm ]
+  return token_doc
+
+
 bp = Blueprint('chat', __name__, url_prefix='/chat')
 #init.py에 app.register_blueprint(chat_views.bp) 등록!!!!
 
@@ -29,16 +46,19 @@ def response():
     
     reply = bot.reply("localuesr", msg)
     ## 진행사항- 로그를 남기려 하는데 평문은 그대로 박으면 된다. 하지만 리스트인 경우(공지, 밥) 어떻게 처리할까?
-    if reply[-1] == '2':
-        cos = CosineW2V()
-        reply = reply.replace('2','')
-        infer_result = cos.infer(msg)
-        infer_result.insert(0,reply)
-        msg2 = (infer_result[1][0]+infer_result[2][0]+infer_result[3][0]).replace(' ',',')
+    if reply[-1] == '?' and reply[-2] == '?':
+        toksen = tokenizer_kkma_noun2(msg)
+        toksen = tokenizer.texts_to_sequences(toksen)
+        toksen = pad_sequences(toksen, 9)
+        predict_array = model.predict(toksen).argmax(axis=1)
+        #{'경상대공지': 0, '공과대공지': 1, '과기대공지': 2, '국문대공지': 3, '디대공지': 4, '디자인대공지': 5, '소프트공지': 6, '약학대공지': 7, '언정대공지': 8}
+        dic = {0:'경상대공지', 1:'공과대공지', 2:'과기대공지', 3:'국문대공지', 4:'디대공지', 5:'디자인대공지', 6:'소프트공지', 7:'약학대공지', 8:'언정대공지'}
+        result = [reply, dic[predict_array[0]], dic[predict_array[1]], dic[predict_array[2]] ]
+        msg2 = (result[0]+result[1]+result[2])
         log = ChatLog(client=msg, bot=msg2, date=today)
         db.session.add(log)
         db.session.commit()
-        params = {"response": infer_result}
+        params = {"response": result}
         result = json.dumps(params, ensure_ascii=False)
         res = make_response(result)
 
@@ -64,5 +84,5 @@ def response():
 
     #User.query.filter(User.name.like('%플라스크%')).all() User 모델 테이블에서 name 값 필터링.
     
-    
+
     

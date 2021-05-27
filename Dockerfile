@@ -32,7 +32,8 @@ RUN pip install flask &&\
     pip install pymysql   &&\
     pip install pandas   &&\
     pip install gensim==3.6.0   &&\
-    pip install konlpy==0.5.2
+    pip install konlpy==0.5.2   &&\
+    pip install tensorflow==2.5.0
 
 
 ENV FLASK_APP=eri

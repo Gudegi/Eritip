@@ -24,8 +24,6 @@ def create_app():
 
     from .views import main_views, create_views, chat_views, haksik_views
     app.register_blueprint(main_views.bp)
-
-
     app.register_blueprint(create_views.bp)
     app.register_blueprint(chat_views.bp)
     app.register_blueprint(haksik_views.bp)
