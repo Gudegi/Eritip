@@ -2,14 +2,14 @@ FROM python:3.7.6
 
 
 
+RUN /usr/local/bin/python -m pip install pip==21.0.1
+RUN pip install tensorflow
+
 ENV JAVA_HOME /usr/lib/jvm/java-1.7-openjdk/jre
-RUN apt-get update && apt-get install -y g++ default-jdk
-RUN pip install konlpy
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && apt-get install -y g++ default-jdk
 
 
-RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
-    pip install tensorflow &&\
-    pip install flask &&\ 
+RUN pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
     pip install requests &&\
