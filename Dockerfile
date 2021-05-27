@@ -21,7 +21,6 @@ RUN cd /usr/local/bin && \
 RUN apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN pip install tensorflow
 RUN pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
