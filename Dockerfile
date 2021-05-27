@@ -21,7 +21,7 @@ RUN cd /usr/local/bin && \
 RUN apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-
+RUN pip install tensorflow
 RUN pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
@@ -32,9 +32,8 @@ RUN pip install flask &&\
     pip install pymysql   &&\
     pip install pandas   &&\
     pip install gensim==3.6.0   &&\
-    pip install konlpy==0.5.2   &&\
-    pip install tensorflow
-
+    pip install konlpy==0.5.2
+  
 
 ENV FLASK_APP=eri
 
