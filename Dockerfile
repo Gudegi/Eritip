@@ -15,7 +15,7 @@ RUN apt-get install -y python3-pip python3-dev
 RUN cd /usr/local/bin && \
   ln -s /usr/bin/python3 python && \
   ln -s /usr/bin/pip3 pip && \
-  pip install --upgrade pip
+  pip install pip==21.0.1
 
 # apt clean
 RUN apt-get clean && \
@@ -33,7 +33,7 @@ RUN pip install flask &&\
     pip install pandas   &&\
     pip install gensim==3.6.0   &&\
     pip install konlpy==0.5.2   &&\
-    pip install tensorflow==2.5.0
+    pip install tensorflow
 
 
 ENV FLASK_APP=eri
