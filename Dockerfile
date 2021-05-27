@@ -1,10 +1,28 @@
-FROM python:3.7.6
+FROM ubuntu:lastest
 
+
+ENV LANG=C.UTF-8
+RUN apt-get update 
+  #apt-get install -y --no-install-recommends tzdata g++ curl
+
+
+# install java
 RUN apt-get install -y openjdk-8-jdk
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
 
-RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
-    pip install flask &&\ 
+# install python
+RUN apt-get install -y python3-pip python3-dev
+RUN cd /usr/local/bin && \
+  ln -s /usr/bin/python3 python && \
+  ln -s /usr/bin/pip3 pip && \
+  pip install --upgrade pip
+
+# apt clean
+RUN apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+
+RUN pip install flask &&\ 
     pip install mysql-connector-python &&\
     pip3 install Flask-Migrate &&\
     pip install requests &&\
@@ -18,7 +36,6 @@ RUN /usr/local/bin/python -m pip install pip==21.0.1 &&\
 
 
 ENV FLASK_APP=eri
-#ENV FLASK_ENV=developmenet
 
 
 WORKDIR /home/eritip
