@@ -4,7 +4,7 @@ FROM python:3.7.6
 
 RUN /usr/local/bin/python -m pip install pip==21.0.1
 #RUN pip install --no-cache-dir tensorflow
-RUN pip install --upgrade tensorflow requests
+RUN pip install tensorflow-cpu==2.3.1 --user
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.7-openjdk/jre
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && apt-get install -y g++ default-jdk
