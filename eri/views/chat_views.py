@@ -1,8 +1,8 @@
 from flask import Blueprint, request, make_response
-from eri.models import User
 from rivescript import RiveScript   
 from eri import db
 from eri.models import ChatLog
+from eri.models import InforLink
 import re, json, os, ast, datetime
 import pandas as pd
 import jpype
@@ -58,6 +58,9 @@ def response():
         dic = {0:'경상대공지', 1:'공과대공지', 2:'과기대공지', 3:'국문대공지', 4:'디자인대공지', 5:'소프트공지', 6:'약학대공지', 7:'언정대공지'}
         result = [reply, dic[predict_array[0]], dic[predict_array[1]], dic[predict_array[2]] ]
         msg2 = (result[1]+result[2]+result[3])
+        result[1] = result[1] + '/./' + InforLink.query.filter(InforLink.keyword==result[1])
+        result[2] = result[2] + '/./' + InforLink.query.filter(InforLink.keyword==result[2])
+        result[3] = result[3] + '/./' + InforLink.query.filter(InforLink.keyword==result[3])
         log = ChatLog(client=msg, bot=msg2, date=today)
         db.session.add(log)
         db.session.commit()
