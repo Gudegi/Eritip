@@ -41,26 +41,64 @@ def response():
     bot.sort_replies()
 
     today = datetime.datetime.today()
-    plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
-    today = today + plus9
+    #plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
+    #today = today + plus9
     today = today.strftime('%Y.%m.%d')
 
     msg = query
     
     reply = bot.reply("localuesr", msg)
-    ## 진행사항- 로그를 남기려 하는데 평문은 그대로 박으면 된다. 하지만 리스트인 경우(공지, 밥) 어떻게 처리할까?
     if reply[-1] == '?' and reply[-2] == '?':
         toksen = tokenizer_kkma_noun2(msg)
         toksen = tokenizer.texts_to_sequences(toksen)
         toksen = pad_sequences(toksen, 9)
-        predict_array = model.predict(toksen).argmax(axis=1)
+        try:
+            predict_array = model.predict(toksen).argmax(axis=1)
+        except:
+            msg2 = reply[:13] + '가이드북을 참고해달라냥.'
+            log = ChatLog(client=msg, bot=msg2, date=today)
+            db.session.add(log)
+            db.session.commit()
+            params = {"response": msg2}
+            result = json.dumps(params, ensure_ascii=False)
+            res = make_response(result)
+            return res
+        if len(predict_array) == 1:
+            msg2 = reply[:13] + '가이드북을 참고해달라냥.'
+            log = ChatLog(client=msg, bot=msg2, date=today)
+            db.session.add(log)
+            db.session.commit()
+            params = {"response": msg2}
+            result = json.dumps(params, ensure_ascii=False)
+            res = make_response(result)
+            return res
         #{'경상대공지': 0, '공과대공지': 1, '과기대공지': 2, '국문대공지': 3, '디자인대공지': 4, '소프트공지': 5, '약학대공지': 6, '언정대공지': 7}
         dic = {0:'경상대공지', 1:'공과대공지', 2:'과기대공지', 3:'국문대공지', 4:'디자인대공지', 5:'소프트공지', 6:'약학대공지', 7:'언정대공지'}
-        result = [reply, dic[predict_array[0]], dic[predict_array[1]], dic[predict_array[2]] ]
-        msg2 = (result[1]+result[2]+result[3])
-        result[1] = result[1] + '/./' + InforLink.query.filter(InforLink.keyword==result[1])
-        result[2] = result[2] + '/./' + InforLink.query.filter(InforLink.keyword==result[2])
-        result[3] = result[3] + '/./' + InforLink.query.filter(InforLink.keyword==result[3])
+        result = [reply]
+        for i in range( len(predict_array)):
+            result.append(dic[predict_array[i]])
+            if i == 2:
+                break
+        if len(result) > 1:
+            msg2 = str(result[1:])
+        else:
+            msg2 = result[0][:13] + '가이드북을 참고해달라냥.'
+            log = ChatLog(client=msg, bot=msg2, date=today)
+            db.session.add(log)
+            db.session.commit()
+            params = {"response": result}
+            result = json.dumps(params, ensure_ascii=False)
+            res = make_response(result)
+
+            return res
+        for i in range(1, len(result)):
+            result[i] = (result[i] + '/./' + str(InforLink.query.filter(InforLink.keyword==result[i]).all()[0].url))
+            if i == 3:
+                break
+        while len(result) < 4:
+            result.append('유사한 문장이 없습니다.' + '/./' + 'https://www.hanyang.ac.kr/')
+        
+
         log = ChatLog(client=msg, bot=msg2, date=today)
         db.session.add(log)
         db.session.commit()

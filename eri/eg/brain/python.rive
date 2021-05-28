@@ -348,3 +348,117 @@
 
 + * 안내
 - <call>informationLink <star> </call>
+
++ * 안내해줘
+- <call>informationLink <star> </call>
+
++ * 안내 부탁해
+- <call>informationLink <star> </call>
+
++ @소융대의미 전화번호 *
+- <call>informationLink 소융대번호</call>
+
++ @공대의미 전화번호 *
+- <call>informationLink 공대번호</call>
+
++ @과기대의미 전화번호 *
+- <call>informationLink 과기대번호</call>
+
++ @약대의미 전화번호 *
+- <call>informationLink 약대번호</call>
+
++ @국문대의미 전화번호 *
+- <call>informationLink 국문대번호</call>
+
++ @언정대의미 전화번호 *
+- <call>informationLink 언정대번호</call>
+
++ @경상대의미 전화번호 *
+- <call>informationLink 경상대번호</call>
+
++ @예대의미 전화번호 *
+- <call>informationLink 예대번호</call>
+
++ @디대의미 전화번호 *
+- <call>informationLink 디대번호</call>
+
++ @소융대의미 전화번호*
+- <call>informationLink 소융대번호</call>
+
++ @공대의미 전화번호*
+- <call>informationLink 공대번호</call>
+
++ @과기대의미 전화번호*
+- <call>informationLink 과기대번호</call>
+
++ @약대의미 전화번호*
+- <call>informationLink 약대번호</call>
+
++ @국문대의미 전화번호*
+- <call>informationLink 국문대번호</call>
+
++ @언정대의미 전화번호*
+- <call>informationLink 언정대번호</call>
+
++ @경상대의미 전화번호*
+- <call>informationLink 경상대번호</call>
+
++ @예대의미 전화번호*
+- <call>informationLink 예대번호</call>
+
++ @디대의미 전화번호*
+- <call>informationLink 디대번호</call>
+
++ *@소융대의미 전화번호 *
+- <call>informationLink 소융대번호</call>
+
++ *@공대의미 전화번호 *
+- <call>informationLink 공대번호</call>
+
++ *@과기대의미 전화번호 *
+- <call>informationLink 과기대번호</call>
+
++ *@약대의미 전화번호 *
+- <call>informationLink 약대번호</call>
+
++ *@국문대의미 전화번호 *
+- <call>informationLink 국문대번호</call>
+
++ *@언정대의미 전화번호 *
+- <call>informationLink 언정대번호</call>
+
++ *@경상대의미 전화번호 *
+- <call>informationLink 경상대번호</call>
+
++ *@예대의미 전화번호 *
+- <call>informationLink 예대번호</call>
+
++ *@디대의미 전화번호 *
+- <call>informationLink 디대번호</call>
+
++ @소융대의미 전화번호
+- <call>informationLink 소융대번호</call>
+
++ @공대의미 전화번호
+- <call>informationLink 공대번호</call>
+
++ @과기대의미 전화번호
+- <call>informationLink 과기대번호</call>
+
++ @약대의미 전화번호
+- <call>informationLink 약대번호</call>
+
++ @국문대의미 전화번호
+- <call>informationLink 국문대번호</call>
+
++ @언정대의미 전화번호
+- <call>informationLink 언정대번호</call>
+
++ @경상대의미 전화번호
+- <call>informationLink 경상대번호</call>
+
++ @예대의미 전화번호
+- <call>informationLink 예대번호</call>
+
++ @디대의미 전화번호
+- <call>informationLink 디대번호</call>
