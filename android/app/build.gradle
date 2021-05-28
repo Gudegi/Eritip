@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.eria.eritip"
+        applicationId "com.eria1.eritip1"
         minSdkVersion 20
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()

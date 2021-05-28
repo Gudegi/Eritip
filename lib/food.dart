@@ -55,7 +55,8 @@ class _FoodState extends State<Food> {
   static const light_grey = const Color(0xfff4f4f4);
 
   Future ProFoodget() async {
-    var url = Uri.parse('http://13.124.213.117:5000/haksik/');
+    //var url = Uri.parse('http://13.124.213.117:5000/haksik/');
+    var url = Uri.parse("http://61.73.162.173:5000/haksik/");
     var response = await http.get(url);
     final jsonResult = jsonDecode(utf8.decode(response.bodyBytes));
     var pro = jsonResult['교직원식당'];
@@ -102,6 +103,7 @@ class _FoodState extends State<Food> {
   }
 
   Future StuFoodget() async {
+    //var url = Uri.parse('http://61.73.162.173:5000/haksik/');
     var url = Uri.parse('http://13.124.213.117:5000/haksik/');
     var response = await http.get(url);
     final jsonResult = jsonDecode(utf8.decode(response.bodyBytes));

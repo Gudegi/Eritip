@@ -28,7 +28,9 @@ class _HomeState extends State<Home> {
   List<String> _data2 = [];
   bool turn = false;
 
-  var BOT_URL = Uri.parse("http://13.124.213.117:5000/chat/");
+  //http://192.168.174.50:5000/chat/
+  var BOT_URL = Uri.parse("http://61.73.162.173:5000/chat/");
+  //var BOT_URL = Uri.parse('http://13.124.213.117:5000/chat/');
 
   void _handleSubmitted(String text) {
     Logger().d(text); //디버깅용 로그 만드는법
@@ -95,7 +97,8 @@ class _HomeState extends State<Home> {
                     ),
                     Expanded(
                       child: TextField(
-                        decoration: InputDecoration(hintStyle:TextStyle(fontFamily: 'GodoM') ,
+                        decoration: InputDecoration(
+                          hintStyle: TextStyle(fontFamily: 'GodoM'),
                           hintText: "하냥이에게 채팅하기",
                         ),
                         controller: _queryController,
@@ -111,7 +114,8 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         this._getResponse();
                       },
-                      child: Icon(Icons.arrow_right, size: 30, color: twilight_blue),
+                      child: Icon(Icons.arrow_right,
+                          size: 30, color: twilight_blue),
                       color: Colors.blueAccent,
                     ),
                   ],
@@ -155,11 +159,20 @@ class _HomeState extends State<Home> {
                   }
                 } catch (e) {
                   //길이가 1 , 안
-                  data2[0] = data2[0].toString() + "<bot>3";
-                  print(data2);
-                  _insertMultiItem(data2);
+                  if (!(data2[0].toString().endsWith("??"))) {
+                    data2[0] = data2[0].toString() + "<bot>3";
+                    print(data2);
+                    _insertMultiItem(data2);
+                  }
                 }
-                if (data2.length == 8) {
+                if (data2.length == 4) {
+                  for (int i = 0; i < data2.length; i++) {
+                    data2[i] = data2[i].toString() + "<bot>4";
+                    print(data2[i]);
+                  }
+                  print(data2.length);
+                  _insertMultiItem(data2);
+                } else if (data2.length == 8) {
                   for (int i = 0; i < data2.length; i++) {
                     data2[i] = data2[i].toString() + "<bot>1";
                     print(data2[i]);
@@ -204,20 +217,32 @@ class _HomeState extends State<Home> {
   }
 
   void _insertMultiItem(List message) {
-    if (message.length == 8) {
-      //대학 공지는 8개  총 길이 8
-      for (int i = 0; i < 8; i++) {
-        _data.add(message[i].toString());
-        _listKey.currentState.insertItem(_data.length - 1);
+    if (message.length == 4) {
+      for (int i = 0; i <= 1; i++) {
+        if (i == 0) {
+          _data.add(message[i].toString());
+          _listKey.currentState.insertItem(_data.length - 1);
+        } else if (i == 1) {
+          String uniMessage = message[1].toString() +
+              message[2].toString() +
+              message[3].toString();
+          _data.add(uniMessage);
+          _listKey.currentState.insertItem(_data.length - 1);
+        }
       }
-    }
-    if (message.length <= 5) {
-      //식당 어디,언제(조식,..),메뉴명,가격, 날짜 + <bot>
+    } else {
       for (int i = 0; i < message.length; i++) {
         _data.add(message[i].toString());
         _listKey.currentState.insertItem(_data.length - 1);
       }
     }
+    /* if (message.length <= 5) {
+      //식당 어디,언제(조식,..),메뉴명,가격, 날짜 + <bot>
+      for (int i = 0; i < message.length; i++) {
+        _data.add(message[i].toString());
+        _listKey.currentState.insertItem(_data.length - 1);
+      }
+    }*/
     Future.delayed(
       Duration(milliseconds: 1000),
       () {
@@ -234,6 +259,7 @@ class _HomeState extends State<Home> {
     bool notice = item.endsWith("<bot>1"); // 공지용 구분
     bool haksik = item.endsWith("<bot>2"); // 학식용
     bool annae = item.endsWith("<bot>3"); // 안내용
+    bool infer = item.endsWith("<bot>4");
     return SizeTransition(
       sizeFactor: animation,
       child: Padding(
@@ -354,41 +380,130 @@ class _HomeState extends State<Home> {
                           javascriptEnabled: true,
                         ),
                       )
-                    : Container(
-                        child: Wrap(
-                          /*mainAxisAlignment: mine
+                    : infer
+                        ? Container(
+                            height: 55,
+                            child: item.contains('??')
+                                ? Wrap(
+                                    alignment: WrapAlignment.start,
+                                    children: [
+                                      Bubble(
+                                        shadowColor: Colors.black,
+                                        elevation: 4,
+                                        nipWidth: 7,
+                                        alignment: Alignment.topLeft,
+                                        stick: true,
+                                        nipOffset: 6,
+                                        nip: BubbleNip.leftTop,
+                                        child:
+                                            Text(item.replaceAll("<bot>4", "")),
+                                        color: Color(0xfff4f4f4),
+                                        padding: BubbleEdges.all(10),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 10,
+                                            right: 10,
+                                            top: 5,
+                                            bottom: 3),
+                                        child: RichText(
+                                          text: TextSpan(
+                                              text: curTime, style: timeText),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Row(
+                                    children: <Widget>[
+                                      Bubble(
+                                        shadowColor: Colors.black,
+                                        elevation: 4,
+                                        nipWidth: 7,
+                                        alignment: Alignment.topLeft,
+                                        stick: true,
+                                        nipOffset: 6,
+                                        nip: BubbleNip.leftTop,
+                                        child: Text(item.split("<bot>4")[0]),
+                                        color: Color(0xfff4f4f4),
+                                        padding: BubbleEdges.all(10),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                        ),
+                                      ),
+                                      Bubble(
+                                        shadowColor: Colors.black,
+                                        elevation: 4,
+                                        nipWidth: 7,
+                                        alignment: Alignment.topLeft,
+                                        stick: true,
+                                        nipOffset: 6,
+                                        child: Text(item.split("<bot>4")[1]),
+                                        color: Color(0xfff4f4f4),
+                                        padding: BubbleEdges.all(10),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 10,
+                                            right: 10,
+                                        ),
+                                      ),
+                                      Bubble(
+                                        shadowColor: Colors.black,
+                                        elevation: 4,
+                                        nipWidth: 7,
+                                        alignment: Alignment.topLeft,
+                                        stick: true,
+                                        nipOffset: 6,
+                                        child: Text(item.split("<bot>4")[2]),
+                                        color: Color(0xfff4f4f4),
+                                        padding: BubbleEdges.all(10),
+                                      ),
+                                    ],
+                                  ),
+                          )
+                        : Container(
+                            child: Wrap(
+                              /*mainAxisAlignment: mine
                             ? MainAxisAlignment.start
                             : MainAxisAlignment.end,*/
-                          alignment:
-                              mine ? WrapAlignment.start : WrapAlignment.end,
-                          children: [
-                            Bubble(
-                              shadowColor: Colors.black,
-                              elevation: 4,
-                              nipWidth: 7,
-                              alignment:
-                                  mine ? Alignment.topLeft : Alignment.topRight,
-                              stick: true,
-                              nipOffset: 6,
-                              nip:
-                                  mine ? BubbleNip.leftTop : BubbleNip.rightTop,
-                              child: Text(item.replaceAll("<bot>", "")),
-                              color:
-                                  mine ? Color(0xfff4f4f4) : Color(0xff6c95ef),
-                              padding: BubbleEdges.all(10),
+                              alignment: mine
+                                  ? WrapAlignment.start
+                                  : WrapAlignment.end,
+                              children: [
+                                Bubble(
+                                  shadowColor: Colors.black,
+                                  elevation: 4,
+                                  nipWidth: 7,
+                                  alignment: mine
+                                      ? Alignment.topLeft
+                                      : Alignment.topRight,
+                                  stick: true,
+                                  nipOffset: 6,
+                                  nip: mine
+                                      ? BubbleNip.leftTop
+                                      : BubbleNip.rightTop,
+                                  child: Text(item.replaceAll("<bot>", "")),
+                                  color: mine
+                                      ? Color(0xfff4f4f4)
+                                      : Color(0xff6c95ef),
+                                  padding: BubbleEdges.all(10),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 10, right: 10, top: 5, bottom: 3),
+                                  child: RichText(
+                                    textAlign:
+                                        mine ? TextAlign.start : TextAlign.end,
+                                    text: TextSpan(
+                                        text: curTime, style: timeText),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 10, right: 10, top: 5, bottom: 3),
-                              child: RichText(
-                                textAlign:
-                                    mine ? TextAlign.start : TextAlign.end,
-                                text: TextSpan(text: curTime, style: timeText),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
       ),
     );
   }
