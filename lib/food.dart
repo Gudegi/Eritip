@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:http/http.dart' as http;
@@ -55,8 +56,7 @@ class _FoodState extends State<Food> {
   static const light_grey = const Color(0xfff4f4f4);
 
   Future ProFoodget() async {
-    //var url = Uri.parse('http://13.124.213.117:5000/haksik/');
-    var url = Uri.parse("http://61.73.162.173:5000/haksik/");
+    var url = Uri.parse('http://13.124.213.117:5000/haksik/');
     var response = await http.get(url);
     final jsonResult = jsonDecode(utf8.decode(response.bodyBytes));
     var pro = jsonResult['교직원식당'];
@@ -272,26 +272,28 @@ class _FoodState extends State<Food> {
             ),
           ),
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: brownish_grey, width: 1)),
-            child: ListTile(
-              dense: true,
-              onTap: ProFoodget,
-              tileColor: Color(0xff6c95ef),
-              title: Text(
-                '교직원식당',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "GothicA1",
-                    fontStyle: FontStyle.normal),
-              ),
-              trailing: Icon(
-                _isOpenp
-                    ? Icons.keyboard_arrow_up_rounded
-                    : Icons.keyboard_arrow_down_rounded,
-                size: 30,
+            child: Bubble(
+              shadowColor: Colors.black,
+              elevation: 3,
+              child: ListTile(
+                dense: true,
+                onTap: ProFoodget,
+                //Color(0xff6c95ef),
+                title: Text(
+                  '교직원식당',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "GodoM",
+                      fontStyle: FontStyle.normal),
+                ),
+                trailing: Icon(
+                  _isOpenp
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 30,
+                ),
               ),
             ),
           ),
@@ -304,12 +306,13 @@ class _FoodState extends State<Food> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 8.0),
                             child: Text(
                               '위치 : 복지관 3층',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Gothic",
+                                  fontFamily: "GothicA1",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 15),
                             ),
@@ -320,13 +323,17 @@ class _FoodState extends State<Food> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                '운영시간 :  ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "Gothic",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0, horizontal: 8.0),
+                                child: Text(
+                                  '운영시간 :  ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "GothicA1",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 15),
+                                ),
                               ),
                               Column(
                                 children: [
@@ -334,7 +341,7 @@ class _FoodState extends State<Food> {
                                     '중식 11:30 ~ 13:30',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -342,7 +349,7 @@ class _FoodState extends State<Food> {
                                     '석식 17:00 ~ 18:30',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -357,26 +364,27 @@ class _FoodState extends State<Food> {
                   ),
           ),
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: brownish_grey, width: 1)),
-            child: ListTile(
-              dense: true,
-              onTap: StuFoodget,
-              tileColor: Color(0xff6c95ef),
-              title: Text(
-                '학생식당',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "GothicA1",
-                    fontStyle: FontStyle.normal),
-              ),
-              trailing: Icon(
-                _isOpens
-                    ? Icons.keyboard_arrow_up_rounded
-                    : Icons.keyboard_arrow_down_rounded,
-                size: 30,
+            child: Bubble(
+              shadowColor: Colors.black,
+              elevation: 3,
+              child: ListTile(
+                dense: true,
+                onTap: StuFoodget,
+                title: Text(
+                  '학생식당',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "GodoM",
+                      fontStyle: FontStyle.normal),
+                ),
+                trailing: Icon(
+                  _isOpens
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 30,
+                ),
               ),
             ),
           ),
@@ -389,12 +397,13 @@ class _FoodState extends State<Food> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 8.0),
                             child: Text(
                               '위치 : 복지관 2층',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Gothic",
+                                  fontFamily: "GothicA1",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 15),
                             ),
@@ -405,13 +414,17 @@ class _FoodState extends State<Food> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                '운영시간 :  ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "GothicA1Medium",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0, horizontal: 8.0),
+                                child: Text(
+                                  '운영시간 :  ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "GothicA1Medium",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 15),
+                                ),
                               ),
                               Column(
                                 children: [
@@ -419,7 +432,7 @@ class _FoodState extends State<Food> {
                                     '중식 11:30 ~ 13:30',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -434,26 +447,27 @@ class _FoodState extends State<Food> {
                   ),
           ),
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: brownish_grey, width: 1)),
-            child: ListTile(
-              dense: true,
-              onTap: DormFoodget,
-              tileColor: Color(0xff6c95ef),
-              title: Text(
-                '창의인재원식당',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "GothicA1",
-                    fontStyle: FontStyle.normal),
-              ),
-              trailing: Icon(
-                _isOpend
-                    ? Icons.keyboard_arrow_up_rounded
-                    : Icons.keyboard_arrow_down_rounded,
-                size: 30,
+            child: Bubble(
+              shadowColor: Colors.black,
+              elevation: 3,
+              child: ListTile(
+                dense: true,
+                onTap: DormFoodget,
+                title: Text(
+                  '창의인재원식당',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "GodoM",
+                      fontStyle: FontStyle.normal),
+                ),
+                trailing: Icon(
+                  _isOpend
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 30,
+                ),
               ),
             ),
           ),
@@ -466,12 +480,13 @@ class _FoodState extends State<Food> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 8.0),
                             child: Text(
                               '위치 : 창의관 1층',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Gothic",
+                                  fontFamily: "GothicA1",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 15),
                             ),
@@ -482,13 +497,17 @@ class _FoodState extends State<Food> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                '운영시간 :  ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "Gothic",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0, horizontal: 8.0),
+                                child: Text(
+                                  '운영시간 :  ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "GothicA1",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 15),
+                                ),
                               ),
                               Column(
                                 children: [
@@ -496,7 +515,7 @@ class _FoodState extends State<Food> {
                                     '조식 07:50 ~ 09:00',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -504,7 +523,7 @@ class _FoodState extends State<Food> {
                                     '중식 11:30 ~ 13:20',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -512,7 +531,7 @@ class _FoodState extends State<Food> {
                                     '석식 17:10 ~ 18:40',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -527,26 +546,27 @@ class _FoodState extends State<Food> {
                   ),
           ),
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: brownish_grey, width: 1)),
-            child: ListTile(
-              dense: true,
-              onTap: CenterFoodget,
-              tileColor: Color(0xff6c95ef),
-              title: Text(
-                '창업보육센터',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "GothicA1",
-                    fontStyle: FontStyle.normal),
-              ),
-              trailing: Icon(
-                _isOpenc
-                    ? Icons.keyboard_arrow_up_rounded
-                    : Icons.keyboard_arrow_down_rounded,
-                size: 30,
+            child: Bubble(
+              shadowColor: Colors.black,
+              elevation: 3,
+              child: ListTile(
+                dense: true,
+                onTap: CenterFoodget,
+                title: Text(
+                  '창업보육센터',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "GodoM",
+                      fontStyle: FontStyle.normal),
+                ),
+                trailing: Icon(
+                  _isOpenc
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 30,
+                ),
               ),
             ),
           ),
@@ -559,12 +579,13 @@ class _FoodState extends State<Food> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 8.0),
                             child: Text(
                               '위치 : 창업보육센터 지하 1층',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Gothic",
+                                  fontFamily: "GothicA1",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 15),
                             ),
@@ -575,13 +596,17 @@ class _FoodState extends State<Food> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                '운영시간 :  ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "Gothic",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0, horizontal: 8.0),
+                                child: Text(
+                                  '운영시간 :  ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "GothicA1",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 15),
+                                ),
                               ),
                               Column(
                                 children: [
@@ -589,7 +614,7 @@ class _FoodState extends State<Food> {
                                     '중식 11:30 ~ 13:30',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -597,7 +622,7 @@ class _FoodState extends State<Food> {
                                     '석식 17:00 ~ 18:30',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
+                                        fontFamily: "GothicA1",
                                         fontStyle: FontStyle.normal,
                                         fontSize: 15),
                                   ),
@@ -612,72 +637,78 @@ class _FoodState extends State<Food> {
                   ),
           ),
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: brownish_grey, width: 1)),
-            child: ListTile(
-              dense: true,
-              tileColor: Color(0xff6c95ef),
-              title: Text(
-                '푸드코트',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "GothicA1",
-                    fontStyle: FontStyle.normal),
+            child: Bubble(
+              shadowColor: Colors.black,
+              elevation: 3,
+              child: ListTile(
+                dense: true,
+                title: Text(
+                  '푸드코트',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "GodoM",
+                      fontStyle: FontStyle.normal),
+                ),
               ),
             ),
           ),
           ListTile(
             title: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text(
-                              '위치 : 복지관 3층',
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 8.0),
+                      child: Text(
+                        '위치 : 복지관 3층',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "GothicA1",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 8.0),
+                          child: Text(
+                            '운영시간 :  ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "GothicA1",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 15),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              '코로나19 상황 안정시까지 휴업입니다.',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: "Gothic",
+                                  fontFamily: "GothicA1",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 15),
                             ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                '운영시간 :  ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "Gothic",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 15),
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    '코로나19 상황 안정시까지 휴업입니다.',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "Gothic",
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 15),
-                                  ),
-                                  SizedBox(height: 4)
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                            SizedBox(height: 4)
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -698,80 +729,83 @@ class _ProFoodState extends State<ProFood> {
   Widget build(BuildContext context) {
     return (_proisOpen == false)
         ? Column(
-            children: <Widget>[Text('오늘은 운영하지 않습니다.')],
+            children: <Widget>[
+              Text(
+                '오늘은 운영하지 않습니다.',
+                style: TextStyle(fontFamily: "GothicA1"),
+              )
+            ],
           )
         : Column(
             children: [
               Row(
                 children: [
-                  Text(
-                    '중식',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
+                  Text('중식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
                 children: [
                   Expanded(child: Text('$_prol_a')),
-                  Text(
-                    '  $_prol_a_price',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
-                  )
+                  Text('  $_prol_a_price',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: twilight_blue,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
                 children: [
                   Expanded(child: Text('$_prol_b')),
-                  Text(
-                    '  $_prol_b_price',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
-                  )
+                  Text('  $_prol_b_price',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: twilight_blue,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
                 children: [
-                  Text(
-                    '석식',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  )
+                  Text('석식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
                 children: [
                   Expanded(child: Text('$_prod')),
-                  Text(
-                    '  $_prod_price',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
-                  )
+                  Text('  $_prod_price',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: twilight_blue,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "GothicA1")),
                 ],
               )
-              ],
+            ],
           );
   }
 }
@@ -789,18 +823,25 @@ class _StuFoodState extends State<StuFood> {
   Widget build(BuildContext context) {
     return (_stuisOpen == false)
         ? Column(
-            children: <Widget>[Text('오늘은 운영하지 않습니다.')],
+            children: <Widget>[
+              Text(
+                '오늘은 운영하지 않습니다.',
+                style: TextStyle(fontFamily: "GothicA1"),
+              )
+            ],
           )
         : Column(
             children: [
               Row(
                 children: [
-                  Text('중식', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('중식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
@@ -810,13 +851,15 @@ class _StuFoodState extends State<StuFood> {
                     '  $_stul_1_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "GothicA1"),
                   )
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
@@ -826,7 +869,9 @@ class _StuFoodState extends State<StuFood> {
                     '  $_stul_2_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "GothicA1"),
                   )
                 ],
               ),
@@ -848,18 +893,22 @@ class _DormFoodState extends State<DormFood> {
   Widget build(BuildContext context) {
     return (_dormisOpen == false)
         ? Column(
-            children: <Widget>[Text('오늘은 운영하지 않습니다.')],
+            children: <Widget>[
+              Text('오늘은 운영하지 않습니다.', style: TextStyle(fontFamily: "GothicA1"))
+            ],
           )
         : Column(
             children: [
               Row(
                 children: [
-                  Text('조식', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('조식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
@@ -869,23 +918,27 @@ class _DormFoodState extends State<DormFood> {
                     '  $_dormb_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "GothicA1"),
                   )
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
                 children: [
-                  Text('중식', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('중식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
@@ -895,23 +948,27 @@ class _DormFoodState extends State<DormFood> {
                     '  $_dorml_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "GothicA1"),
                   )
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
                 children: [
-                  Text('석식', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('석식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
@@ -921,13 +978,15 @@ class _DormFoodState extends State<DormFood> {
                     '  $_dormd_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        fontFamily: "GothicA1",
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700),
                   )
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
@@ -937,7 +996,9 @@ class _DormFoodState extends State<DormFood> {
                     '  $_dormd2_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        fontFamily: "GothicA1",
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700),
                   )
                 ],
               )
@@ -959,18 +1020,25 @@ class _CenterFoodState extends State<CenterFood> {
   Widget build(BuildContext context) {
     return (_centerisOpen == false)
         ? Column(
-            children: <Widget>[Text('오늘은 운영하지 않습니다.')],
+            children: <Widget>[
+              Text(
+                '오늘은 운영하지 않습니다.',
+                style: TextStyle(fontFamily: "GothicA1"),
+              )
+            ],
           )
         : Column(
             children: [
               Row(
                 children: [
-                  Text('중식', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('중식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
@@ -980,13 +1048,15 @@ class _CenterFoodState extends State<CenterFood> {
                     '  $_centerl_H_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        fontFamily: "GothicA1",
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700),
                   )
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
@@ -996,23 +1066,27 @@ class _CenterFoodState extends State<CenterFood> {
                     '  $_centerl_1_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        fontFamily: "GothicA1",
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700),
                   )
                 ],
               ),
               Divider(
                 thickness: 1,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height2, //divider의 패딩부분
               ),
               Row(
                 children: [
-                  Text('석식', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('석식',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontFamily: "GothicA1")),
                 ],
               ),
               Divider(
                 thickness: 2,
-                color: brownish_grey,
+                color: twilight_blue,
                 height: height1, //divider의 패딩부분
               ),
               Row(
@@ -1022,7 +1096,9 @@ class _CenterFoodState extends State<CenterFood> {
                     '  $_centerd_price',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                        color: twilight_blue, fontWeight: FontWeight.w700),
+                        fontFamily: "GothicA1",
+                        color: twilight_blue,
+                        fontWeight: FontWeight.w700),
                   )
                 ],
               )

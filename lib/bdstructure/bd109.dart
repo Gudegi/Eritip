@@ -1,41 +1,46 @@
 import 'package:flutter/material.dart';
 class Bd109_1st extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('디자인문화관 1층 구조도'),
-        centerTitle: true,
-        toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
+    static const twilight_blue = const Color(0xff0b4c86);
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: twilight_blue),
+          title: Text(
+            '디자인 문화관 1층 구조도',
+            style: TextStyle(
+                fontFamily: "GodoM",
+                fontWeight: FontWeight.bold,
+                fontSize: 21,
+                color: twilight_blue,
+                fontStyle: FontStyle.normal),
           ),
+          centerTitle: true,
+          toolbarHeight: 70,
         ),
-      ),
-      body: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/109img1st.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/109desc1st.png'),
-              )],
-            )),
-      ),
-    );
+        body: Container(
+          color: Colors.white,
+          child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(1),
+                    child: Image.asset('images/109img1st.png'),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Image.asset('images/109desc1st.png'),
+                  )
+                ],
+              )),
+        ),
+      );
   }
 }

@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
   bool turn = false;
 
   //http://192.168.174.50:5000/chat/
-  var BOT_URL = Uri.parse("http://61.73.162.173:5000/chat/");
+  var BOT_URL = Uri.parse("http://211.217.219.234:5000/chat/");
   //var BOT_URL = Uri.parse('http://13.124.213.117:5000/chat/');
 
   void _handleSubmitted(String text) {
@@ -260,6 +260,7 @@ class _HomeState extends State<Home> {
     bool haksik = item.endsWith("<bot>2"); // 학식용
     bool annae = item.endsWith("<bot>3"); // 안내용
     bool infer = item.endsWith("<bot>4");
+    bool checkLen = false;
     return SizeTransition(
       sizeFactor: animation,
       child: Padding(
@@ -423,7 +424,17 @@ class _HomeState extends State<Home> {
                                         stick: true,
                                         nipOffset: 6,
                                         nip: BubbleNip.leftTop,
-                                        child: Text(item.split("<bot>4")[0]),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: linkText,
+                                              text: item.split("<bot>4")[0].split("/./")[0],
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () async {
+                                                  var url = item.split("<bot>4")[0].split("/./")[1];
+                                                  _launchWebView(url); //하이퍼링
+                                                },
+                                            ),
+                                          ),
                                         color: Color(0xfff4f4f4),
                                         padding: BubbleEdges.all(10),
                                       ),
@@ -440,7 +451,17 @@ class _HomeState extends State<Home> {
                                         alignment: Alignment.topLeft,
                                         stick: true,
                                         nipOffset: 6,
-                                        child: Text(item.split("<bot>4")[1]),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: linkText,
+                                              text: item.split("<bot>4")[1].split("/./")[0],
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () async {
+                                                  var url = item.split("<bot>4")[1].split("/./")[1];
+                                                  _launchWebView(url); //하이퍼링
+                                                },
+                                            ),
+                                          ),
                                         color: Color(0xfff4f4f4),
                                         padding: BubbleEdges.all(10),
                                       ),
@@ -457,7 +478,17 @@ class _HomeState extends State<Home> {
                                         alignment: Alignment.topLeft,
                                         stick: true,
                                         nipOffset: 6,
-                                        child: Text(item.split("<bot>4")[2]),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: linkText,
+                                              text: item.split("<bot>4")[2].split("/./")[0],
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () async {
+                                                  var url = item.split("<bot>4")[2].split("/./")[1];
+                                                  _launchWebView(url); //하이퍼링
+                                                },
+                                            ),
+                                          ),
                                         color: Color(0xfff4f4f4),
                                         padding: BubbleEdges.all(10),
                                       ),

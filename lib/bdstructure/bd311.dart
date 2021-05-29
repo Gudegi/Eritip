@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
 class Bd311_B1st extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 지하 1층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n지하 1층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311imgb1st.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311descb1st.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311imgb1st.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311descb1st.png'),
+                )
+              ],
             )),
       ),
     );
@@ -41,40 +46,45 @@ class Bd311_B1st extends StatelessWidget {
 }
 
 class Bd311_1st extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 1층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n 1층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311img1st.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311desc1st.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311img1st.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311desc1st.png'),
+                )
+              ],
             )),
       ),
     );
@@ -82,40 +92,45 @@ class Bd311_1st extends StatelessWidget {
 }
 
 class Bd311_2nd extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 2층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n 2층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311img2nd.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311desc2nd.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311img2nd.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311desc2nd.png'),
+                )
+              ],
             )),
       ),
     );
@@ -123,40 +138,45 @@ class Bd311_2nd extends StatelessWidget {
 }
 
 class Bd311_3rd extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 3층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n 3층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311img3rd.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311desc3rd.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311img3rd.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311desc3rd.png'),
+                )
+              ],
             )),
       ),
     );
@@ -164,40 +184,45 @@ class Bd311_3rd extends StatelessWidget {
 }
 
 class Bd311_4th extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 4층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n 4층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311img4th.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311desc4th.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311img4th.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311desc4th.png'),
+                )
+              ],
             )),
       ),
     );
@@ -205,40 +230,45 @@ class Bd311_4th extends StatelessWidget {
 }
 
 class Bd311_5th extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 5층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n 5층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311img5th.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311desc5th.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311img5th.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311desc5th.png'),
+                )
+              ],
             )),
       ),
     );
@@ -246,40 +276,45 @@ class Bd311_5th extends StatelessWidget {
 }
 
 class Bd311_6th extends StatelessWidget {
+  static const twilight_blue = const Color(0xff0b4c86);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('학연산클러스터지원센터 6층 구조도',style: TextStyle(fontSize: 15),),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: twilight_blue),
+        title: Text(
+          '학연산클러스터지원센터\n 6층 구조도',textAlign: TextAlign.center,
+          style: TextStyle(
+              fontFamily: "GodoM",
+              fontWeight: FontWeight.bold,
+              fontSize: 21,
+              color: twilight_blue,
+              fontStyle: FontStyle.normal),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft, //컬러 시작점
-                  end: Alignment.topRight,
-                  colors: <Color>[
-                    //입맛대로 Colors.색상 해도 상관없음
-                    Color(0xFF3366FF),
-                    Colors.blueAccent
-                  ]
-              )
-          ),
-        ),
       ),
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Image.asset('images/311img6th.png'),
-              ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: Image.asset('images/311desc6th.png'),
-              )],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Image.asset('images/311img6th.png'),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('images/311desc6th.png'),
+                )
+              ],
             )),
       ),
     );
