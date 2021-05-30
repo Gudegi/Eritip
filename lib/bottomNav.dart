@@ -12,6 +12,7 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
+  static const twilight_blue = const Color(0xff0b4c86);
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     MapUniv(),
@@ -54,12 +55,12 @@ class _BottomNavState extends State<BottomNav> {
               label: '셔틀',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.brightness_5_outlined),
-              label: '설정',
+              icon: Icon(Icons.bar_chart_rounded),
+              label: '통계',
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blueAccent,
+          selectedItemColor: twilight_blue,
           selectedLabelStyle: TextStyle(fontFamily: 'GodoM'),
           unselectedLabelStyle: TextStyle(fontFamily: 'GodoM'),
           unselectedItemColor: Colors.blueGrey,
