@@ -22,7 +22,8 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   static const twilight_blue = const Color(0xff0b4c86);
   int touchedIndex = -1;
-
+  double ranDouble = Random().nextDouble();
+  int ranInt = Random().nextInt(3) + 2;
 
   List<PieChartSectionData> showingSections(int infer1, int all1, int incor1) {
     return List.generate(3, (i) {
@@ -30,7 +31,8 @@ class _SettingState extends State<Setting> {
       final infer = infer1.toDouble();
       final all = all1.toDouble();
       final incor = incor1.toDouble();
-      print(double.parse(( (all-infer-incor)/all).toStringAsFixed(2)) *100);
+      print(
+          double.parse(((all - infer - incor) / all).toStringAsFixed(2)) * 100);
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
       switch (i) {
@@ -38,7 +40,7 @@ class _SettingState extends State<Setting> {
           return PieChartSectionData(
             color: const Color(0xff0293ee),
             value: infer,
-            title: '${double.parse((infer/all).toStringAsFixed(2)) *100}%',
+            title: '${double.parse((infer / all).toStringAsFixed(2)) * 100}%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -49,7 +51,8 @@ class _SettingState extends State<Setting> {
           return PieChartSectionData(
             color: const Color(0xfff8b250),
             value: (all - infer - incor),
-            title: '${double.parse(( (all-infer-incor)/all).toStringAsFixed(2)) *100}%',
+            title:
+                '${double.parse(((all - infer - incor) / all).toStringAsFixed(2)) * 100}%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -60,7 +63,7 @@ class _SettingState extends State<Setting> {
           return PieChartSectionData(
             color: const Color(0xff845bef),
             value: incor,
-            title: '${double.parse(( incor/all).toStringAsFixed(2)) *100}%',
+            title: '${double.parse((incor / all).toStringAsFixed(2)) * 100}%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -351,17 +354,26 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                         AspectRatio(
-                          aspectRatio: 0.8,
+                          aspectRatio: 16 / 9,
                           child: Card(
                             child: ScatterChart(
                               ScatterChartData(
                                 scatterSpots: [
                                   ScatterSpot(
                                     (snapshot.data[1][0]['COUNT(client)'] >
-                                            50.0)
-                                        ? 20
+                                            100.0)
+                                        ? 80
                                         : 40,
-                                    (snapshot.data[1][0]['COUNT(client)'] / 3),
+                                    ((snapshot.data[1][0]['COUNT(client)'] /
+                                                1) >
+                                            100.0)
+                                        ? ((snapshot.data[1][0]
+                                                    ['COUNT(client)'] /
+                                                1) /
+                                            ranInt.toDouble())
+                                        : (snapshot.data[1][0]
+                                                ['COUNT(client)'] /
+                                            1),
                                     color: selectedSpots.contains(0)
                                         ? Colors.green
                                         : Colors.blueGrey,
@@ -369,10 +381,19 @@ class _SettingState extends State<Setting> {
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][1]['COUNT(client)'] >
-                                            50.0)
-                                        ? 21
-                                        : 41,
-                                    (snapshot.data[1][1]['COUNT(client)'] / 2),
+                                            100.0)
+                                        ? 41
+                                        : 61,
+                                    ((snapshot.data[1][1]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][1]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][1]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(1)
                                         ? Colors.yellow
                                         : Colors.blueGrey,
@@ -380,10 +401,19 @@ class _SettingState extends State<Setting> {
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][2]['COUNT(client)'] >
-                                            50.0)
-                                        ? 22
-                                        : 42,
-                                    (snapshot.data[1][2]['COUNT(client)'] / 3),
+                                            100.0)
+                                        ? 62
+                                        : 22,
+                                    ((snapshot.data[1][2]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][2]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][2]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(2)
                                         ? Colors.purpleAccent
                                         : Colors.blueGrey,
@@ -391,10 +421,19 @@ class _SettingState extends State<Setting> {
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][3]['COUNT(client)'] >
-                                            50.0)
-                                        ? 23
-                                        : 3,
-                                    (snapshot.data[1][3]['COUNT(client)'] / 1),
+                                            100.0)
+                                        ? 43
+                                        : 23,
+                                    ((snapshot.data[1][3]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][3]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][3]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(3)
                                         ? Colors.orange
                                         : Colors.blueGrey,
@@ -402,10 +441,19 @@ class _SettingState extends State<Setting> {
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][4]['COUNT(client)'] >
-                                            50.0)
-                                        ? 24
-                                        : 44,
-                                    (snapshot.data[1][4]['COUNT(client)'] / 1),
+                                            100.0)
+                                        ? 44
+                                        : 84,
+                                    ((snapshot.data[1][4]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][4]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][4]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(4)
                                         ? Colors.brown
                                         : Colors.blueGrey,
@@ -413,10 +461,19 @@ class _SettingState extends State<Setting> {
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][5]['COUNT(client)'] >
-                                            50.0)
+                                            100.0)
                                         ? 25
-                                        : 5,
-                                    (snapshot.data[1][5]['COUNT(client)'] / 3),
+                                        : 65,
+                                    ((snapshot.data[1][5]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][5]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][5]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(5)
                                         ? Colors.lightGreenAccent
                                         : Colors.blueGrey,
@@ -424,21 +481,39 @@ class _SettingState extends State<Setting> {
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][6]['COUNT(client)'] >
-                                            50.0)
-                                        ? 26
+                                            100.0)
+                                        ? 16
                                         : 46,
-                                    (snapshot.data[1][6]['COUNT(client)'] / 2),
+                                    ((snapshot.data[1][6]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][6]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][6]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(6)
                                         ? Colors.red
                                         : Colors.blueGrey,
-                                    radius: 10,
+                                    radius: 10
                                   ),
                                   ScatterSpot(
                                     (snapshot.data[1][7]['COUNT(client)'] >
-                                            50.0)
+                                            100.0)
                                         ? 27
                                         : 7,
-                                    (snapshot.data[1][7]['COUNT(client)'] / 1),
+                                    ((snapshot.data[1][7]['COUNT(client)'] /
+                                        1) >
+                                        100.0)
+                                        ? ((snapshot.data[1][7]
+                                    ['COUNT(client)'] /
+                                        1) /
+                                        ranInt.toDouble())
+                                        : (snapshot.data[1][7]
+                                    ['COUNT(client)'] /
+                                        1),
                                     color: selectedSpots.contains(7)
                                         ? Colors.tealAccent
                                         : Colors.blueGrey,
@@ -446,9 +521,9 @@ class _SettingState extends State<Setting> {
                                   ),
                                 ],
                                 minX: 0,
-                                maxX: 50,
+                                maxX: 100,
                                 minY: 0,
-                                maxY: 30,
+                                maxY: 100,
                                 borderData: FlBorderData(
                                   show: false,
                                 ),
@@ -523,7 +598,8 @@ class _SettingState extends State<Setting> {
                     ),
                   ),
                 ),
-                Padding(
+                //원 그래프. 사용 x
+                /* Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Bubble(
                     shadowColor: Colors.black,
@@ -615,6 +691,29 @@ class _SettingState extends State<Setting> {
                       ],
                     ),
                   ),
+                ),*/
+                Bubble(
+                  shadowColor: Colors.black,
+                  elevation: 3,
+                  child: Container(
+                    child: TextButton.icon(
+                      icon: Icon(Icons.person, color: Colors.black),
+                      label: Text(
+                        '제작진',
+                        style: TextStyle(
+                            fontFamily: 'GothicA1',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            color: Colors.black87),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingSub()));
+                      },
+                    ),
+                  ),
                 ),
                 Bubble(
                   shadowColor: Colors.black,
@@ -648,12 +747,12 @@ class _SettingState extends State<Setting> {
                 StaggeredTile.extent(
                     4, (MediaQuery.of(context).size.height) * 0.37),
                 StaggeredTile.extent(
-                    2, (MediaQuery.of(context).size.height) * 0.32),
+                    4, (MediaQuery.of(context).size.height) * 0.32),
                 StaggeredTile.extent(
-                    2, (MediaQuery.of(context).size.height) * 0.32),
+                    4, (MediaQuery.of(context).size.height) * 0.07),
                 StaggeredTile.extent(
                   4,
-                  (MediaQuery.of(context).size.height) * 0.07,
+                  (MediaQuery.of(context).size.height) * 0.0000001,
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web_browser/web_browser.dart';
 
 class SettingSub extends StatefulWidget {
   @override
@@ -11,7 +12,12 @@ class SettingSub extends StatefulWidget {
 
 class _SettingSubState extends State<SettingSub> {
   static const twilight_blue = const Color(0xff0b4c86);
-  var linkText = TextStyle(color: Colors.blue, fontSize: 17, fontFamily: 'GothicA1', fontWeight: FontWeight.w600); //링크용 스타일
+  String url = 'https://blog.naver.com/hyerica4473';
+  var linkText = TextStyle(
+      color: Colors.blue,
+      fontSize: 17,
+      fontFamily: 'GothicA1',
+      fontWeight: FontWeight.w600); //링크용 스타일
 
   @override
   Widget build(BuildContext context) {
@@ -35,49 +41,50 @@ class _SettingSubState extends State<SettingSub> {
             ),
           ),
           Container(
-            height: (MediaQuery.of(context).size.height) * 0.25,
+            height: (MediaQuery.of(context).size.height) * 0.10,
             alignment: Alignment.center,
             child: Bubble(
               child: Text(
                 'Tean ERIA \n\n 강경원,  정소빈,  최지훈 ',
                 style: TextStyle(
-                  fontFamily: 'GothicA1',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 17,
-                    color: Colors.black
-                ),
+                    fontFamily: 'GothicA1',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 17,
+                    color: Colors.black),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(10),
-            child:
-          Container(
-            height: (MediaQuery.of(context).size.height) * 0.12,
-            alignment: Alignment.center,
-            child: Bubble(
-              shadowColor: Colors.black,
-              elevation: 4,
-              nipWidth: 7,
-              stick: true,
-              nipOffset: 6,
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: '제작지원 \n 구조도 자료제공, 한양대 에리카 공식 블로그',
-                  style: linkText,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      var url = 'https://blog.naver.com/hyerica4473';
-                      _launchWebView(url); //하이퍼링
-                    },
+            child: Container(
+              height: (MediaQuery.of(context).size.height) * 0.12,
+              alignment: Alignment.center,
+              child: Bubble(
+                shadowColor: Colors.black,
+                elevation: 4,
+                nipWidth: 7,
+                stick: true,
+                nipOffset: 6,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: '제작지원 \n 구조도 자료, 한양대 에리카 공식 블로그',
+                    style: linkText,
+
+                  ),
                 ),
+                padding: BubbleEdges.all(10),
               ),
-              padding: BubbleEdges.all(10),
             ),
-          ),),
-        ],
+          ),
+          Container(
+            constraints: BoxConstraints(maxHeight: 450),
+            child: WebBrowser(
+              initialUrl: url,
+              javascriptEnabled: true,
+            ),
+          )],
       ),
     );
   }
