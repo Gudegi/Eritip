@@ -41,8 +41,8 @@ def response():
     bot.sort_replies()
 
     today = datetime.datetime.today()
-    #plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
-    #today = today + plus9
+    plus9 = datetime.timedelta(hours=9)  #한국시간에 맞추려 GMT+9
+    today = today + plus9
     today = today.strftime('%Y.%m.%d')
 
     msg = query
