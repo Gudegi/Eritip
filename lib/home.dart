@@ -30,7 +30,6 @@ class _HomeState extends State<Home> {
 
   //http://192.168.174.50:5000/chat/
   var BOT_URL = Uri.parse("http://175.193.216.252:5000/chat/");
-  //var BOT_URL = Uri.parse('http://13.124.213.117:5000/chat/');
 
   void _handleSubmitted(String text) {
     Logger().d(text); //디버깅용 로그 만드는법
